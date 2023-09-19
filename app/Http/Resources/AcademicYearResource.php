@@ -2,19 +2,18 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class AcademicYearResource extends ResourceCollection
+class AcademicYearResource extends JsonResource
 {
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
         return [
             'replid' => $this->replid,
             'tahunajaran' => $this->tahunajaran,
@@ -23,7 +22,7 @@ class AcademicYearResource extends ResourceCollection
             'tglakhir' => $this->tglakhir,
             'keterangan' => $this->keterangan,
             'created_at' => $this->created_at->timestamp,
-            'updated_at' => $this->updated_at->timestamp,
+            'updated_at' => $this->updated_at->timestamp
 
         ];
     }
