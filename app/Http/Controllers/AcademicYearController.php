@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Resources\AcademicYearResourceCollection;
+use App\Http\Resources\AcademicYearResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\JsonResponse;
+
+
+
+class AcademicYearController extends Controller
+{
+    public function findAllAcademicYearByCompanyIDandDepartmen($idcompany, $departemen) : JsonResponse
+    {
+        $academicYear = DB::table('tahunajaran')
+                -> where('idcompany', '=', $idcompany)
+                -> where('departemen', '=', $departemen)
+                -> where('aktif', '=', '1')
+                -> get();
+
+        return (new AcademicYearResourceCollection($academicYear))->response()->setStatusCode(200);
+    }
+}
