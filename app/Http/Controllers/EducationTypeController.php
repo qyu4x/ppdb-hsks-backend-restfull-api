@@ -17,6 +17,7 @@ class EducationTypeController extends Controller
             ->select('jenis_pendidikan')
             ->whereNot('jenis_pendidikan', null)
             ->get();
+
         return (new EducationTypeResourceCollection($educationTypes))->response()->setStatusCode(200);
 
     }
