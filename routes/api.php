@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\EducationTypeController;
+use \App\Http\Controllers\SchoolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,6 @@ use \App\Http\Controllers\EducationTypeController;
 
 Route::middleware([])->group(function () {
     Route::get('/v1/hsks/education-types', [EducationTypeController::class, 'findAllEducationType']);
+
+    Route::get('/v1/hsks/education-types/{educationType}/schools', [SchoolController::class, 'findAllSchool']);
 });
