@@ -30,7 +30,7 @@ Route::middleware([])->group(function () {
 
     Route::get('/v1/hsks/company/{idCompany}/department/{idDepartment}/academic-years', [AcademicYearController::class, 'findAcademicYearByCompanyIdAndDepartmentId']);
 
-    Route::get('/v1/hsks/company/{idCompany}/education-levels', [EducationLevelController::class, 'findByCompanyId']);
+    Route::get('/v1/hsks/company/{idCompany}/department', [EducationLevelController::class, 'findByCompanyId']);
 
     Route::get('/v1/hsks/department/{department}/academic-years/{idAcademicYear}/grade-level', [EducationLevelController::class, 'findGradeLevelByDepartmentAndAcademicYearId']);
 
