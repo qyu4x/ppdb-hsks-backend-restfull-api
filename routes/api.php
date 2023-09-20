@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\EducationTypeController;
 use \App\Http\Controllers\AcademicYearController;
 use \App\Http\Controllers\SchoolController;
+use \App\Http\Controllers\EducationLevelController;
 use \App\Http\Controllers\GuardianController;
+
 
 
 /*
@@ -25,10 +27,14 @@ use \App\Http\Controllers\GuardianController;
 
 Route::middleware([])->group(function () {
     Route::get('/v1/hsks/education-types', [EducationTypeController::class, 'findAllEducationType']);
-  
+
     Route::get('/v1/hsks/education-types/{educationType}/schools', [SchoolController::class, 'findAllSchool']);
 
-    Route::get('/v1/hsks/company/{idCompany}/departemen/{iddepartemen}/academic-years', [AcademicYearController::class, 'findAcademicYearByCompanyIDandDepartemen']);
+    Route::get('/v1/hsks/company/{idCompany}/department/{idDepartment}/academic-years', [AcademicYearController::class, 'findAcademicYearByCompanyIdAndDepartmentId']);
+
+    Route::get('/v1/hsks/company/{idCompany}/department', [EducationLevelController::class, 'findByCompanyId']);
+
+    Route::get('/v1/hsks/department/{department}/academic-years/{idAcademicYear}/grade-level', [EducationLevelController::class, 'findGradeLevelByDepartmentAndAcademicYearId']);
 
     Route::get('/v1/hsks/guardians', [GuardianController::class, 'findAllGuardian']);
 
