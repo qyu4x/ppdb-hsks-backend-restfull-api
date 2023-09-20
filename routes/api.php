@@ -22,5 +22,5 @@ use \App\Http\Controllers\AcademicYearController;
 
 Route::middleware([])->group(function () {
     Route::get('/v1/hsks/education-types', [EducationTypeController::class, 'findAllEducationType']);
-    Route::get('/v1/hsks/departemen/{departemen}/academic-years', [AcademicYearController::class, 'findAllAcademicYearByCompanyIDandDepartemen']);
+    Route::get('/v1/hsks/company/{idCompany}/departemen/{iddepartemen}/academic-years', [AcademicYearController::class, 'findAcademicYearByCompanyIDandDepartemen']);
 });

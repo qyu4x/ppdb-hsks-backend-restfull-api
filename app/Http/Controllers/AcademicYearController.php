@@ -12,15 +12,16 @@ use Illuminate\Http\JsonResponse;
 
 class AcademicYearController extends Controller
 {
-    public function findAllAcademicYearByCompanyIDandDepartemen() : JsonResponse
+    public function findAcademicYearByCompanyIDandDepartemen($companyId, $departemenId)
     {
-        $academicYear = DB::table('tahunajaran')
-                -> where('idcompany')
-                -> where('departemen')
-                -> where('aktif', '=', '1')
-                -> get();
-        dd($academicYear);
+        $academicYears = DB::table('departemen')
+            ->join('tahunajaran', 'departemen.departemen', '=', 'tahunajaran.departemen')
+            ->select('tahunajaran.replid', 'tahunajaran.departemen', 'tahunajaran.tahunajaran', 'tahunajaran.keterangan', 'tahunajaran.tglmulai', 'tahunajaran.tglakhir')
+            ->where('departemen.replid', '=', $departemenId)
+            ->where('tahunajaran.idcompany', '=', $companyId)
+            ->where('tahunajaran.aktif', '=', 1)
+            ->get();
 
-        return (new AcademicYearResourceCollection($academicYear))->response()->setStatusCode(200);
+        return (new AcademicYearResourceCollection($academicYears))->response()->setStatusCode(200);
     }
 }
