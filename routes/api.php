@@ -6,6 +6,7 @@ use \App\Http\Controllers\EducationTypeController;
 use \App\Http\Controllers\AcademicYearController;
 use \App\Http\Controllers\SchoolController;
 use \App\Http\Controllers\EducationLevelController;
+use \App\Http\Controllers\ProgramController;
 use \App\Http\Controllers\GuardianController;
 
 
@@ -36,8 +37,8 @@ Route::middleware([])->group(function () {
 
     Route::get('/v1/hsks/department/{department}/academic-years/{idAcademicYear}/grade-level', [EducationLevelController::class, 'findGradeLevelByDepartmentAndAcademicYearId']);
 
+    Route::get('/v1/hsks/company/{idCompany}/department/{department}/programs', [ProgramController::class, 'findByCompanyIdAndDepartment']);
+
     Route::get('/v1/hsks/guardians', [GuardianController::class, 'findAllGuardian']);
-
-
 
 });
