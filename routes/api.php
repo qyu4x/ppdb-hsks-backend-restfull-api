@@ -8,6 +8,7 @@ use \App\Http\Controllers\SchoolController;
 use \App\Http\Controllers\EducationLevelController;
 use \App\Http\Controllers\ProgramController;
 use \App\Http\Controllers\GuardianController;
+use \App\Http\Controllers\CustomerServiceController;
 
 
 
@@ -35,10 +36,11 @@ Route::middleware([])->group(function () {
 
     Route::get('/v1/hsks/company/{idCompany}/department', [EducationLevelController::class, 'findByCompanyId']);
 
-    Route::get('/v1/hsks/department/{department}/academic-years/{idAcademicYear}/grade-level', [EducationLevelController::class, 'findGradeLevelByDepartmentAndAcademicYearId']);
+    Route::get('/v1/hsks/company/{idCompany}/department/{idDepartment}/academic-years/{idAcademicYear}/grade-level', [EducationLevelController::class, 'findGradeLevelByCompanyIdAndDepartmentIdAndAcademicYearId']);
 
-    Route::get('/v1/hsks/company/{idCompany}/department/{department}/programs', [ProgramController::class, 'findByCompanyIdAndDepartment']);
+    Route::get('/v1/hsks/company/{idCompany}/department/{idDepartment}/programs', [ProgramController::class, 'findByCompanyIdAndDepartmentId']);
 
     Route::get('/v1/hsks/guardians', [GuardianController::class, 'findAllGuardian']);
 
+    Route::get('/v1/hsks/company/{idCompany}/customer-services', [CustomerServiceController::class, 'findCustomerServiceByCompanyId']);
 });
