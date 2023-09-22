@@ -52,4 +52,7 @@ Route::middleware(['auth-api'])->group(function () {
     Route::middleware('can:isParent')->get('/v1/hsks/users/test-auth', [UserAuthController::class, 'test']);
 
     Route::get('/v1/hsks/surveys', [SurveyController::class, 'findAll'])->withoutMiddleware(['auth-api']);
+    Route::post('/v1/hsks/surveys', [SurveyController::class, 'postAnswer'])->withoutMiddleware(['auth-api']);
 });
+
+

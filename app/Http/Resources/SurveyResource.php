@@ -35,7 +35,7 @@ class SurveyResource extends JsonResource
     {
         return [
             'voting' => SurveyVotingResource::collection($this->voting),
-            'reason' => SurveyReasonResource::collection($this->reason),
+            'alasan' => SurveyReasonResource::collection($this->reason),
             'media' => SurveyMediaResource::collection($this->media)
         ];
     }
