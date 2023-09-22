@@ -11,6 +11,7 @@ use \App\Http\Controllers\GuardianController;
 use \App\Http\Controllers\CustomerServiceController;
 use \App\Http\Controllers\UserAuthController;
 use \App\Http\Controllers\SurveyController;
+use \App\Http\Controllers\OnlineChronologiesController;
 
 
 
@@ -53,6 +54,8 @@ Route::middleware(['auth-api'])->group(function () {
 
     Route::get('/v1/hsks/surveys', [SurveyController::class, 'findAll'])->withoutMiddleware(['auth-api']);
     Route::post('/v1/hsks/surveys', [SurveyController::class, 'postAnswer'])->withoutMiddleware(['auth-api']);
+
+    Route::get('/v1/hsks/user/{idUser}/online-chronologies/{idOnlineChronologies}/preview', [OnlineChronologiesController::class, 'findPreviewOnlineChronologiesByIdAndUserId'])->withoutMiddleware(['auth-api']);
 });
 
 
