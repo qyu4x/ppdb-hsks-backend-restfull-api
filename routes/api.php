@@ -10,6 +10,7 @@ use \App\Http\Controllers\ProgramController;
 use \App\Http\Controllers\GuardianController;
 use \App\Http\Controllers\CustomerServiceController;
 use \App\Http\Controllers\UserAuthController;
+use \App\Http\Controllers\SurveyController;
 
 
 
@@ -50,4 +51,8 @@ Route::middleware(['auth-api'])->group(function () {
     Route::middleware('can:isParentOrStudent')->post('/v1/hsks/users/logout', [UserAuthController::class, 'logout']);
     Route::middleware('can:isParent')->get('/v1/hsks/users/test-auth', [UserAuthController::class, 'test']);
 
+    Route::get('/v1/hsks/surveys', [SurveyController::class, 'findAll'])->withoutMiddleware(['auth-api']);
+    Route::post('/v1/hsks/surveys', [SurveyController::class, 'postAnswer'])->withoutMiddleware(['auth-api']);
 });
+
+
