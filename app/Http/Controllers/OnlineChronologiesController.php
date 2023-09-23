@@ -11,11 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class OnlineChronologiesController extends Controller
 {
-    public function findPreviewOnlineChronologiesByIdAndUserId(string $userId, string $onlineChronologiesId) : JsonResponse
-    {
-        $userId = Crypt::decrypt(base64_decode($userId));
-        $onlineChronologiesId = Crypt::decrypt(base64_decode($onlineChronologiesId));
 
+    private function queryFindPreviewOnlineChronologiesByIdAndUserId(string $userId, string $onlineChronologiesId) : mixed
+    {
         $onlineChronologies = DB::table('online_kronologis')
             ->select(
                 'online_kronologis.replid',
@@ -41,7 +39,9 @@ class OnlineChronologiesController extends Controller
                 'hrm_company.wappdb',
                 'hrm_company.wappdb2',
                 'hrm_company.wappdb3',
-                'hrm_company.phone'
+                'hrm_company.phone',
+                'online_kronologis.created_date',
+                'online_kronologis.modified_date'
             )
             ->join('hrm_company', 'hrm_company.replid', '=', 'online_kronologis.idunitbisnis')
             ->join('tahunajaran', 'tahunajaran.replid', '=', 'online_kronologis.idtahunajaran')
@@ -60,6 +60,21 @@ class OnlineChronologiesController extends Controller
             ], 404));
         }
 
-        return (new OnlineChronologiesPreviewResource($onlineChronologies))->response()->setStatusCode(200);
+        return $onlineChronologies;
+    }
+    public function findPreviewOnlineChronologiesByIdAndUserId(string $userId, string $onlineChronologiesId) : JsonResponse
+    {
+        $userId = Crypt::decrypt(base64_decode($userId));
+        $onlineChronologiesId = Crypt::decrypt(base64_decode($onlineChronologiesId));
+
+        return (new OnlineChronologiesPreviewResource($this->queryFindPreviewOnlineChronologiesByIdAndUserId($userId, $onlineChronologiesId)))->response()->setStatusCode(200);
+    }
+
+    public function findCurrentPreviewOnlineChronologiesById(string $onlineChronologiesId) : JsonResponse
+    {
+        $userId = auth()->user()->replid;
+        $onlineChronologiesId = Crypt::decrypt(base64_decode($onlineChronologiesId));
+
+        return (new OnlineChronologiesPreviewResource($this->queryFindPreviewOnlineChronologiesByIdAndUserId($userId, $onlineChronologiesId)))->response()->setStatusCode(200);
     }
 }

@@ -38,6 +38,9 @@ class OnlineChronologiesPreviewResource extends JsonResource
             'wappdb' => $this->wappdb,
             'wappdb2' => $this->wappdb2,
             'wappdb3' => $this->wappdb3,
-            'phone' => $this->phone,        ];
+            'phone' => $this->phone,
+            'created_date' => $this->created_date,
+            'modified_date' => $this->modified_date
+            ];
     }
 }
