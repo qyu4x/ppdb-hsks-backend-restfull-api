@@ -57,6 +57,7 @@ Route::middleware(['auth-api'])->group(function () {
 
     Route::get('/v1/hsks/user/{idUser}/online-chronologies/{idOnlineChronologies}/preview', [OnlineChronologiesController::class, 'findPreviewOnlineChronologiesByIdAndUserId'])->withoutMiddleware(['auth-api']);
     Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/preview', [OnlineChronologiesController::class, 'findCurrentPreviewOnlineChronologiesById']);
+    Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/preview', [OnlineChronologiesController::class, 'findAllCurrentPreviewOnlineChronologies']);
 });
 
 
