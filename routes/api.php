@@ -15,6 +15,7 @@ use \App\Http\Controllers\OnlineChronologiesController;
 use \App\Http\Controllers\GeoLocationController;
 use \App\Http\Controllers\ReligionController;
 use \App\Http\Controllers\ResidenceController;
+use \App\Http\Controllers\DocumentAttachmentController;
 
 
 
@@ -70,6 +71,7 @@ Route::middleware(['auth-api'])->group(function () {
     Route::get('/v1/hsks/religions', [ReligionController::class, 'findAllReligion'])->withoutMiddleware(['auth-api']);
 
     Route::get('/v1/hsks/residences', [ResidenceController::class, 'findAllResidence'])->withoutMiddleware(['auth-api']);
+    Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
 });
 
 
