@@ -12,6 +12,10 @@ use \App\Http\Controllers\CustomerServiceController;
 use \App\Http\Controllers\UserAuthController;
 use \App\Http\Controllers\SurveyController;
 use \App\Http\Controllers\OnlineChronologiesController;
+use \App\Http\Controllers\GeoLocationController;
+use \App\Http\Controllers\ReligionController;
+use \App\Http\Controllers\ResidenceController;
+use \App\Http\Controllers\DocumentAttachmentController;
 
 
 
@@ -59,6 +63,15 @@ Route::middleware(['auth-api'])->group(function () {
     Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/preview', [OnlineChronologiesController::class, 'findCurrentPreviewOnlineChronologiesById']);
     Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/preview', [OnlineChronologiesController::class, 'findAllCurrentPreviewOnlineChronologies']);
     Route::middleware('can:isParent')->post('/v1/hsks/online-chronologies', [OnlineChronologiesController::class, 'createOnlineChronologies']);
+
+    Route::get('/v1/hsks/country', [GeoLocationController::class, 'findAllCountry'])->withoutMiddleware(['auth-api']);
+    Route::get('/v1/hsks/country/{idCountry}/province', [GeoLocationController::class, 'findAllProvinceByCountryId'])->withoutMiddleware(['auth-api']);
+    Route::get('/v1/hsks/province/{idProvince}/city', [GeoLocationController::class, 'findAllCityByProvinceId'])->withoutMiddleware(['auth-api']);
+
+    Route::get('/v1/hsks/religions', [ReligionController::class, 'findAllReligion'])->withoutMiddleware(['auth-api']);
+
+    Route::get('/v1/hsks/residences', [ResidenceController::class, 'findAllResidence'])->withoutMiddleware(['auth-api']);
+    Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
 });
 
 
