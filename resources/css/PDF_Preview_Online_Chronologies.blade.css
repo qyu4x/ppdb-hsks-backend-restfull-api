@@ -1,72 +1,74 @@
-        .flex {
-            display: flex;
-        }
-        .justify-center {
-            justify-content: center;
-        }
-        .items-center {
-            align-items: center;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .text-black {
-            color: #000;
-        }
-        .font-bold {
-            font-weight: bold;
-        }
-        .font-semibold {
-            font-weight: 600;
-        }
-        .text-sm {
-            font-size: 14px;
-        }
-        .border-t {
-            border-top: 1px solid #A6A4A4;
-        }
-        .mb-1 {
-            margin-bottom: 1rem;
-        }
-        .mb-5 {
-            margin-bottom: 5rem;
-        }
-        .mt-2 {
-            margin-top: 2rem;
-        }
-        .mt-5 {
-            margin-top: 5rem;
-        }
-        .ml-2 {
-            margin-left: 2px;
-        }
-        .text-Hijau {
-            color: green;
-        }
-        .text-SD {
-            color: red;
-        }
-        .grid {
-            display: grid;
-        }
-        .grid-cols-2 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .gap-1 {
-            gap: 1rem;
-        }
-        .text-start {
-            text-align: start;
-        }
-        .text-base {
-            font-size: 16px;
-        }
-        .text-justify {
-            text-align: justify;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .text-bold {
-            font-weight: bold;
-        }
+/* Reset some default styles */
+body, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Define your custom styles here */
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-black {
+    color: #000;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+.border-t {
+    border-top: 1px solid #A6A4A4;
+}
+
+.m-w-auto {
+    margin: 0 auto;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.mb-1 {
+    margin-bottom: 1px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.text-Hijau {
+    color: green;
+}
+
+.ml-2 {
+    margin-left: 2px;
+}
+
+.text-SD {
+    color: red;
+}

@@ -10,19 +10,19 @@
     <div class="flex justify-center items-center text-center text-black">
         <div>
             <div>
-                <p class="font-bold text-sm">HOMESCHOOLING KAK SETO BEKASI</p>
+                <p class="font-bold text-sm"><?= $onlineChronologies->nama?></p>
                 <div class="flex justify-center items-center">
-                    <img class="" src="{LogoHSKS}" alt="LogoHSKS" />
+                    <img class="" src="<?= $onlineChronologies->logo?>" alt="LogoHSKS" />
                 </div>
-                <p class="text-sm">Jl. Puncak Cikunir No. 25 Kampung Dua Jakasampurna, Bekasi Barat, Bekasi 17145 - Indonesia</p>
-                <p class="text-sm">Telp: (+6221) 2221 1078, +6287851056889 Email: info@bekasi.hsks.sch.id Website: www.bekasi.hsks.sch.id</p>
+                <p class="text-sm"><?= $onlineChronologies->street?>, <?=$onlineChronologies->city?> - <?=$onlineChronologies->country?></p>
+                <p class="text-sm">Telp: <?=$onlineChronologies->phone?>, <?=$onlineChronologies->wappdb?> <?=$onlineChronologies->hrm_company_email?> Website: <?=$onlineChronologies->website?></p>
             </div>
             <div class="border-t border-[#A6A4A4] m-w-auto mt-5 mb-1"></div>
             <div class="border-t border-[#A6A4A4] m-w-auto mb-5"></div>
             <div>
                 <div>
                     <p class="text-base font-semibold mb-5 lsm:text-start">Registrasi PPDB Sekolah Kak Seto</p>
-                    <p class="text-base text-justify">Terima kasih Bapak/Ibu telah mengisi form registrasi PPDB kami, Calon Peserta Didik dengan nama X telah terdaftar dalam sistem kami.</p>
+                    <p class="text-base text-justify">Terima kasih Bapak/Ibu telah mengisi form registrasi PPDB kami, Calon Peserta Didik dengan nama <?= $onlineChronologies->namacalon ?> telah terdaftar dalam sistem kami.</p>
                 </div>
                 <div>
                     <p class="text-base font-semibold mt-5 mb-5 lsm:text-start">Data Orang Tua/Wali</p>
@@ -33,31 +33,31 @@
                                 Hubungan Keluarga
                             </div>
                             <div class="text-base">
-                                <span>:</span> Ibu
+                                <span>:</span> <?= $onlineChronologies->ortu ?>
                             </div>
                             <div class="text-base ">
                                 Nama
                             </div>
                             <div class="text-base">
-                                <span>:</span> Bagas
+                                <span>:</span> <?= $onlineChronologies->namaortu ?>
                             </div>
                             <div class="text-base ">
                                 No Handphone
                             </div>
                             <div class="text-base">
-                                <span>:</span> 085155207987
+                                <span>:</span> <?= $onlineChronologies->handphoneortu ?>
                             </div>
                             <div class="text-base ">
                                 No Whatsapp
                             </div>
                             <div class="text-base">
-                                <span>:</span> 085155207987
+                                <span>:</span> <?= $onlineChronologies->whatsapportu ?>
                             </div>
                             <div class="text-base ">
                                 Email :
                             </div>
                             <div class="text-base">
-                                <span>:</span> tes@gmail.com
+                                <span>:</span> <?= $onlineChronologies->emailortu ?>
                             </div>
                         </div>
                     </div>
@@ -69,25 +69,25 @@
                                 Nama Peserta Didik
                             </div>
                             <div class="text-base">
-                                <span>:</span> X
+                                <span>:</span> <?= $onlineChronologies->namacalon?>
                             </div>
                             <div class="text-base ">
                                 Jenis Kelamin
                             </div>
                             <div class="text-base">
-                                <span>:</span> Laki-Laki
+                                <span>:</span> <?= $onlineChronologies->jeniskelamin?>
                             </div>
                             <div class="text-base ">
                                 Tanggal Lahir
                             </div>
                             <div class="text-base">
-                                <span>:</span> 01 Agustus 2023
+                                <span>:</span> <?= $onlineChronologies->tanggallahir?>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <p class="mt-2 text-start text-base font-base">Apakah calon peserta didik terindikasi "Anak Berkebutuhan Khusus"?<span class="text-Hijau ml-2">Iya</span></p>
-                        <p class="mt-2 text-start text-base font-base">Apakah calon peserta didik pernah melakukan pemeriksaan psikologis dari psikolog atau psikiater?<span class="text-SD ml-2">Tidak</span></p>
+                        <p class="mt-2 text-start text-base font-base">Apakah calon peserta didik terindikasi "Anak Berkebutuhan Khusus"?<span class="text-Hijau ml-2"><?= $onlineChronologies->abk ?></span></p>
+                        <p class="mt-2 text-start text-base font-base">Apakah calon peserta didik pernah melakukan pemeriksaan psikologis dari psikolog atau psikiater?<span class="text-SD ml-2"><?= $onlineChronologies->pemeriksaan_psikolog ?></span></p>
                     </div>
                     <p class="text-base font-semibold mt-5 mb-5 lsm:text-start">Jenjang Yang Dituju</p>
                     <div class="border-t border-[#A6A4A4] m-w-auto mb-5"></div>
@@ -97,69 +97,69 @@
                                 Lokasi Sekolah
                             </div>
                             <div class="text-base">
-                                <span>:</span> HOMESCHOOLING KAK SETO BEKASI
+                                <span>:</span> <?= $onlineChronologies->namaunitbisnis?>
                             </div>
                             <div class="text-base ">
                                 Tahun Pelajaran
                             </div>
                             <div class="text-base">
-                                <span>:</span> 2022/2023
+                                <span>:</span> <?= $onlineChronologies->tahunajaran?>
                             </div>
                             <div class="text-base ">
                                 Tingkat
                             </div>
                             <div class="text-base">
-                                <span>:</span> 1
+                                <span>:</span> <?= $onlineChronologies->tingkat ?>
                             </div>
                             <div class="text-base ">
                                 Program Yang Dipilih
                             </div>
                             <div class="text-base">
-                                <span>:</span> Distance Learning
+                                <span>:</span> <?= $onlineChronologies->kelompok ?>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <p class="mt-5 text-start text-base mb-5 font-base">Proses Selanjutnya dapat dilakukan dengan mengakses hamalan <span class="text-Hijau">Login</span>, dengan akun:</p>
+                        <p class="mt-5 text-start text-base mb-5 font-base">Proses Selanjutnya dapat dilakukan dengan mengakses halaman <span class="text-Hijau">Login</span>, dengan akun:</p>
                     </div>
                     <div class="grid grid-cols-2 text-start gap-1">
                         <div class="text-base ">
                             Email
                         </div>
                         <div class="text-base">
-                            <span>:</span> tes@gmail.com
+                            <span>:</span> <?= $onlineChronologies->email ?>
                         </div>
                         <div class="text-base ">
                             Token
                         </div>
                         <div class="text-base">
-                            <span>:</span> ITviM@L9
+                            <span>:</span> <?= $onlineChronologies->tokenonline ?>
                         </div>
                         <div class="text-base ">
                             Tanggal Dibuat
                         </div>
                         <div class="text-base">
-                            <span>:</span> 28 Agustus 2023
+                            <span>:</span> <?= $onlineChronologies->created_date ?>
                         </div>
                     </div>
                     <div>
-                        <p class="mt-5 text-start text-base mb-5 font-base">Untuk melanjutkan proses PPDB Bapak/Ibu dapat melakukan <span class="font-bold">pembayaran sebesar Rp.500.000,00,- </span>untuk pembelian formulir </p>
+                        <p class="mt-5 text-start text-base mb-5 font-base">Untuk melanjutkan proses PPDB, Bapak/Ibu dapat melakukan <span class="font-bold">pembayaran sebesar Rp.500.000,00,-</span> untuk pembelian formulir.</p>
                     </div>
                     <div>
-                        <p class="mt-5 text-start text-base mb-5 font-base">Silahkan menghubungi CS kami untuk informasi pembayaran pada nomor berikut:</p>
+                        <p class="mt-5 text-start text-base mb-5 font-base">Silahkan menghubungi Customer Service kami untuk informasi pembayaran pada nomor berikut:</p>
                     </div>
                     <div class="grid grid-cols-2 text-start gap-1">
                         <div class="text-base ">
                             Email Panitia
                         </div>
                         <div class="text-base">
-                            <span>:</span> info@bekasi.hsks.sch.id
+                            <span>:</span> <?= $onlineChronologies->hrm_company_email ?>
                         </div>
                         <div class="text-base ">
                             Whatsapp Panitia
                         </div>
                         <div class="text-base">
-                            <span>:</span> +6287851056889
+                            <span>:</span> <?= $onlineChronologies->wappdb ?>
                         </div>
                     </div>
                     <div>
