@@ -44,7 +44,13 @@ class OnlineChronologiesController extends Controller
                 'hrm_company.wappdb',
                 'hrm_company.wappdb2',
                 'hrm_company.wappdb3',
+                'hrm_company.logo',
                 'hrm_company.phone',
+                'hrm_company.street',
+                'hrm_company.city',
+                'hrm_company.zip',
+                'hrm_company.country',
+                'hrm_company.website',
                 'online_kronologis.created_date',
                 'online_kronologis.modified_date'
             )
