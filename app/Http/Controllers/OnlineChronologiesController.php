@@ -13,6 +13,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Response;
 
 class OnlineChronologiesController extends Controller
 {
@@ -270,4 +272,17 @@ class OnlineChronologiesController extends Controller
             user: $user, onlineChronologies: $onlineChronologies
         ))->response()->setStatusCode(200);
     }
+
+    public function generatePDF(string $onlineChronologiesId) : Response
+    {
+        $userId = auth()->user()->replid;
+        $onlineChronologiesId = Crypt::decrypt(base64_decode($onlineChronologiesId));
+
+        $pdf = Pdf::loadView('pdf.PDF_Preview_Online_Chronologies',($this->queryFindPreviewOnlineChronologiesByIdAndUserId($userId, $onlineChronologiesId)))->setPaper('a4', 'portrait');
+        $pdf = $pdf->output();
+        return response($pdf)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'attachment; filename="PDF_Preview_Online_Chronologies.pdf"');
+    }
+
 }
