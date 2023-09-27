@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Registration Confirmation</title>
-    <link rel="stylesheet" type="text/css" href="/css/PDF_Preview_Online_Chronologies.blade.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/PDF_Preview_Online_Chronologies.blade.css">
 </head>
 <body>
     <div class="flex justify-center items-center text-center text-black">
         <div>
             <div>
-                <p class="font-bold text-sm"><?= $onlineChronologies->nama?></p>
+                <p class="font-bold text-sm"><?= $onlineChronologies['nama'] ?></p>
                 <div class="flex justify-center items-center">
                     <img class="" src="<?= $onlineChronologies->logo?>" alt="LogoHSKS" />
                 </div>
