@@ -284,7 +284,7 @@ class OnlineChronologiesController extends Controller
         $userId = auth()->user()->replid;
         $onlineChronologies = $this->queryFindPreviewOnlineChronologiesByIdAndUserId($userId, $onlineChronologiesId);
 
-        $pdf = Pdf::loadView('PDF_Preview_Online_Chronologies',($onlineChronologies))->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('PDF_Preview_Online_Chronologies',compact('onlineChronologies'))->setPaper('a4', 'portrait');
         $pdf = $pdf->output();
 
         $filename = $onlineChronologies->namacalon . '.pdf';
