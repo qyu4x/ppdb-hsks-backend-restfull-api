@@ -282,9 +282,9 @@ class OnlineChronologiesController extends Controller
     public function generatePDF(string $onlineChronologiesId) : Response
     {
         $userId = auth()->user()->replid;
-        $onlineChronologies = get_object_vars($this->queryFindPreviewOnlineChronologiesByIdAndUserId($userId, $onlineChronologiesId));
+        $onlineChronologies = $this->queryFindPreviewOnlineChronologiesByIdAndUserId($userId, $onlineChronologiesId);
 
-        $pdf = Pdf::loadView('PDF_Preview_Online_Chronologies',$onlineChronologies)->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('PDF_Preview_Online_Chronologies',compact('onlineChronologies'))->setPaper('a4', 'portrait');
         $pdf = $pdf->output();
 
         $filename = $onlineChronologies->namacalon . '.pdf';

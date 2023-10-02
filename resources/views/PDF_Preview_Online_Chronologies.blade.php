@@ -4,166 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Registration Confirmation</title>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="/css/PDF_Preview_Online_Chronologies.blade.css">
+=======
+    <style>
+        /* Internal CSS */
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: black;
+        }
+
+        .container {
+            display: flex;
+            color: black;
+            text-align: justify
+        }
+
+        .bold-text {
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 1rem;
+        }
+        .bold-text-2{
+            font-weight: bold;
+            font-size: 12px;
+            margin-top: 5px;
+            display: inline;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-img {
+            /* Tambahkan properti CSS untuk logo di sini */
+        }
+
+        .address-text {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .text-1{
+            font-size: 12px;
+            margin-top: 2rem;
+            text-align: justify;
+        }
+
+        .text-2{
+            font-size: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .border-line {
+            border-top: 1px solid #A6A4A4;
+            max-width: auto;
+        }
+
+        .data-container {
+            /* text-align: start; */
+            text-align: justify;
+            margin-top: 10px;
+
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            text-align: start;
+            gap: 1px;
+        }
+
+        .green-text {
+            color: #00FF00;
+            margin-left: 2px;
+        }
+
+        .red-text {
+            color: #FF0000;
+            margin-left: 2px;
+        }
+
+        .bold-green-text {
+            color: #27B6C1;
+            font-weight: bold;
+        }
+    </style>
+    
+
+>>>>>>> 48d742d9af9024e1bd0e7e7511160c75f7d0eba8
 </head>
 <body>
-    <div class="flex justify-center items-center text-center text-black">
+   <div class="flex-container">
         <div>
             <div>
+<<<<<<< HEAD
                 <p class="font-bold text-sm"><?= $onlineChronologies['nama'] ?></p>
                 <div class="flex justify-center items-center">
                     <img class="" src="<?= $onlineChronologies->logo?>" alt="LogoHSKS" />
+=======
+                <p class="bold-text"><?= $onlineChronologies->nama?></p>
+                <div class="logo-container">
+                    <img class="logo" src="<?= $onlineChronologies->logo?>" alt="LogoHSKS" />
+>>>>>>> 48d742d9af9024e1bd0e7e7511160c75f7d0eba8
                 </div>
-                <p class="text-sm"><?= $onlineChronologies->street?>, <?=$onlineChronologies->city?> - <?=$onlineChronologies->country?></p>
-                <p class="text-sm">Telp: <?=$onlineChronologies->phone?>, <?=$onlineChronologies->wappdb?> <?=$onlineChronologies->hrm_company_email?> Website: <?=$onlineChronologies->website?></p>
+                <p class="address-text"><?= $onlineChronologies->street?>, <?=$onlineChronologies->city?> - <?=$onlineChronologies->country?></p>
+                <p class="address-text">Telp: <?=$onlineChronologies->phone?>, <?=$onlineChronologies->wappdb?> <?=$onlineChronologies->hrm_company_email?> Website: <?=$onlineChronologies->website?></p>
             </div>
-            <div class="border-t border-[#A6A4A4] m-w-auto mt-5 mb-1"></div>
-            <div class="border-t border-[#A6A4A4] m-w-auto mb-5"></div>
+            <div class="border-line"></div>
+            <div class="border-line"></div>
             <div>
                 <div>
-                    <p class="text-base font-semibold mb-5 lsm:text-start">Registrasi PPDB Sekolah Kak Seto</p>
-                    <p class="text-base text-justify">Terima kasih Bapak/Ibu telah mengisi form registrasi PPDB kami, Calon Peserta Didik dengan nama <?= $onlineChronologies->namacalon ?> telah terdaftar dalam sistem kami.</p>
+                    <p class="bold-text">Registrasi PPDB Sekolah Kak Seto</p>
+                    <p class="text-1">Terima kasih Bapak/Ibu telah mengisi form registrasi PPDB kami, Calon Peserta Didik dengan nama <?= $onlineChronologies->namacalon ?> telah terdaftar dalam sistem kami.</p>
                 </div>
                 <div>
-                    <p class="text-base font-semibold mt-5 mb-5 lsm:text-start">Data Orang Tua/Wali</p>
-                    <div class="border-t border-[#A6A4A4] m-w-auto mb-5"></div>
-                    <div>
-                        <div class="grid grid-cols-2 text-start gap-1">
-                            <div class="text-base ">
-                                Hubungan Keluarga
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->ortu ?>
-                            </div>
-                            <div class="text-base ">
-                                Nama
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->namaortu ?>
-                            </div>
-                            <div class="text-base ">
-                                No Handphone
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->handphoneortu ?>
-                            </div>
-                            <div class="text-base ">
-                                No Whatsapp
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->whatsapportu ?>
-                            </div>
-                            <div class="text-base ">
-                                Email :
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->emailortu ?>
+                    <p class="bold-text">Data Orang Tua/Wali</p>
+                    <div class="border-line"></div>
+                        <div class="data-container">
+                            <div class="grid-container">
+                                <div class="address-text"><p class="bold-text-2">Hubungan Keluarga</p><span>:</span> <?= $onlineChronologies->ortu ?></div>
+                                <div class="address-text"><p class="bold-text-2">Nama</p><span>:</span> <?= $onlineChronologies->namaortu ?></div>
+                                <div class="address-text"><p class="bold-text-2">No. Handphone</p><span>:</span> <?= $onlineChronologies->handphoneortu ?></div>
+                                <div class="address-text"><p class="bold-text-2">No. Whatsapp</p><span>:</span> <?= $onlineChronologies->whatsapportu ?></div>
+                                <div class="address-text"><p class="bold-text-2">Email</p><span>:</span> <?= $onlineChronologies->emailortu ?></div>
                             </div>
                         </div>
                     </div>
-                    <p class="text-base font-semibold mt-5 mb-5 lsm:text-start">Data Peserta Didik</p>
-                    <div class="border-t border-[#A6A4A4] m-w-auto mb-5"></div>
-                    <div class="text-center">
-                        <div class="grid grid-cols-2 text-start gap-1">
-                            <div class="text-base ">
-                                Nama Peserta Didik
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->namacalon?>
-                            </div>
-                            <div class="text-base ">
-                                Jenis Kelamin
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->jeniskelamin?>
-                            </div>
-                            <div class="text-base ">
-                                Tanggal Lahir
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->tanggallahir?>
-                            </div>
+                    <p class="bold-text">Data Peserta Didik</p>
+                    <div class="border-line"></div>
+                    <div class="data-container">
+                        <div class="grid-container">
+                            <div class="address-text"><p class="bold-text-2">Nama Peserta Didik</p><span>:</span> <?= $onlineChronologies->namacalon?></div>
+                            <div class="address-text"><p class="bold-text-2">Jenis Kelamin</p><span>:</span> <?= ($onlineChronologies->jeniskelamin === 'l') ? 'Laki-Laki' : 'Perempuan'?></div>
+                            <div class="address-text"><p class="bold-text-2">Tanggal Lahir</p><span>:</span> <?= date('d F Y', strtotime($onlineChronologies->tanggallahir))?></div>
+                        </div>
+                    </div>
+                    <div class="data-container">
+                        <p class="address-text">Apakah calon peserta didik terindikasi "Anak Berkebutuhan Khusus"?<span class="green-text"> <?= $onlineChronologies->abk ? 'Iya' : 'Tidak'?></span></p>
+                        <p class="text-2">Apakah calon peserta didik pernah melakukan pemeriksaan psikologis dari psikolog atau psikiater?<span class="red-text"> <?= $onlineChronologies->pemeriksaan_psikolog ? 'Iya' : 'Tidak' ?></span></p>
+                    </div>
+                    <p class="bold-text">Jenjang Yang Dituju</p>
+                    <div class="border-line"></div>
+                    <div class="data-container">
+                        <div class="grid-container">
+                            <div class="address-text"><p class="bold-text-2">Lokasi Sekolah</p><span>:</span> <?= $onlineChronologies->nama?></div>
+                            <div class="address-text"><p class="bold-text-2">Tahun Pelajaran</p><span>:</span> <?= $onlineChronologies->tahunajaran?></div>
+                            <div class="address-text"><p class="bold-text-2">Tingkat</p><span>:</span> <?= $onlineChronologies->tingkat ?></div>
+                            <div class="address-text"><p class="bold-text-2">Program Yang Dipilih</p><span>:</span> <?= $onlineChronologies->kelompok ?></div>
                         </div>
                     </div>
                     <div>
-                        <p class="mt-2 text-start text-base font-base">Apakah calon peserta didik terindikasi "Anak Berkebutuhan Khusus"?<span class="text-Hijau ml-2"><?= $onlineChronologies->abk ?></span></p>
-                        <p class="mt-2 text-start text-base font-base">Apakah calon peserta didik pernah melakukan pemeriksaan psikologis dari psikolog atau psikiater?<span class="text-SD ml-2"><?= $onlineChronologies->pemeriksaan_psikolog ?></span></p>
+                        <p class="text-1">Proses Selanjutnya dapat dilakukan dengan mengakses halaman <span class="bold-green-text">Login</span>, dengan akun:</p>
                     </div>
-                    <p class="text-base font-semibold mt-5 mb-5 lsm:text-start">Jenjang Yang Dituju</p>
-                    <div class="border-t border-[#A6A4A4] m-w-auto mb-5"></div>
-                    <div class="text-center">
-                        <div class="grid grid-cols-2 text-start gap-1">
-                            <div class="text-base ">
-                                Lokasi Sekolah
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->namaunitbisnis?>
-                            </div>
-                            <div class="text-base ">
-                                Tahun Pelajaran
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->tahunajaran?>
-                            </div>
-                            <div class="text-base ">
-                                Tingkat
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->tingkat ?>
-                            </div>
-                            <div class="text-base ">
-                                Program Yang Dipilih
-                            </div>
-                            <div class="text-base">
-                                <span>:</span> <?= $onlineChronologies->kelompok ?>
-                            </div>
-                        </div>
+                    <div class="data-container">
+                        <div class="address-text">Email<span>:</span> <p class="bold-text-2"><?= $onlineChronologies->email ?></p></div>
+                        <div class="address-text">Token<span>:</span> <p class="bold-text-2"><?= $onlineChronologies->tokenonline ?></p></div>
+                        <div class="address-text">Tanggal Dibuat<span>:</span> <p class="bold-text-2"><?= date('d F Y', strtotime($onlineChronologies->created_date)) ?></p></div>
+                    </div>
+                    <div class="data-container">
+                        <p class="address-text">Untuk melanjutkan proses PPDB, Bapak/Ibu dapat melakukan <span class="bold-text">pembayaran sebesar Rp.500.000,00,-</span> untuk pembelian formulir.</p>
+                    </div>
+                    <div class="data-container">
+                        <p class="address-text">Silahkan menghubungi Customer Service kami untuk informasi pembayaran pada nomor berikut:</p>
+                    </div>
+                    <div class="data-container">
+                        <div class="address-text">Email Panitia<span>:</span> <p class="bold-text-2"><?= $onlineChronologies->hrm_company_email ?></p></div>
+                        <div class="address-text">Whatsapp Panitia<span>:</span> <p class="bold-text-2"><?= $onlineChronologies->wappdb ?></p></div>
                     </div>
                     <div>
-                        <p class="mt-5 text-start text-base mb-5 font-base">Proses Selanjutnya dapat dilakukan dengan mengakses halaman <span class="text-Hijau">Login</span>, dengan akun:</p>
-                    </div>
-                    <div class="grid grid-cols-2 text-start gap-1">
-                        <div class="text-base ">
-                            Email
-                        </div>
-                        <div class="text-base">
-                            <span>:</span> <?= $onlineChronologies->email ?>
-                        </div>
-                        <div class="text-base ">
-                            Token
-                        </div>
-                        <div class="text-base">
-                            <span>:</span> <?= $onlineChronologies->tokenonline ?>
-                        </div>
-                        <div class="text-base ">
-                            Tanggal Dibuat
-                        </div>
-                        <div class="text-base">
-                            <span>:</span> <?= $onlineChronologies->created_date ?>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="mt-5 text-start text-base mb-5 font-base">Untuk melanjutkan proses PPDB, Bapak/Ibu dapat melakukan <span class="font-bold">pembayaran sebesar Rp.500.000,00,-</span> untuk pembelian formulir.</p>
-                    </div>
-                    <div>
-                        <p class="mt-5 text-start text-base mb-5 font-base">Silahkan menghubungi Customer Service kami untuk informasi pembayaran pada nomor berikut:</p>
-                    </div>
-                    <div class="grid grid-cols-2 text-start gap-1">
-                        <div class="text-base ">
-                            Email Panitia
-                        </div>
-                        <div class="text-base">
-                            <span>:</span> <?= $onlineChronologies->hrm_company_email ?>
-                        </div>
-                        <div class="text-base ">
-                            Whatsapp Panitia
-                        </div>
-                        <div class="text-base">
-                            <span>:</span> <?= $onlineChronologies->wappdb ?>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="mt-5 text-start text-base font-base">Tim kami akan segera menghubungi Bapak/Ibu setelah pembayaran terverifikasi.</p>
+                        <p class="text-1">Tim kami akan segera menghubungi Bapak/Ibu setelah pembayaran terverifikasi.</p>
                     </div>
                 </div>
             </div>
