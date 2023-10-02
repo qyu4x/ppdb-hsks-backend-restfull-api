@@ -17,11 +17,12 @@ class PaymentRegistrationResource extends JsonResource
     public function toArray($request)
     {
         $data = [
-            'id_online_kronologis' => $this->replid,
+            'id_online_kronologis' => $this->idonlinekronologis,
             'nama_cpd' => $this->namacalon
         ];
 
         if (isset($this->idcalon)) {
+            $data['id_calon_siswa'] = $this->idcalonsiswa;
             $data['no_pendaftaran'] = $this->nopendaftaran;
             $data['biaya_formulir'] = $this->keu_assessment;
             $data['biaya_assessment'] = $this->keu_form;

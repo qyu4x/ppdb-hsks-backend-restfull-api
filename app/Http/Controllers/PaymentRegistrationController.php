@@ -27,26 +27,25 @@ class PaymentRegistrationController extends Controller
             ], 404));
         }
 
-        if (!isset($onlineChronologies->idcalon)) {
-            return (new PaymentRegistrationResource($onlineChronologies))->response()->setStatusCode(200);
-        } else {
-            $payment = DB::table('online_kronologis')
-                ->select(
-                    'online_kronologis.replid',
-                    'online_kronologis.idcalon',
-                    'online_kronologis.namacalon',
-                    'calonsiswa.keu_assessment',
-                    'calonsiswa.nopendaftaran',
-                    'calonsiswa.keu_form',
-                    'calonsiswa.keu_up'
-                )
-                ->join('calonsiswa', 'calonsiswa.replid', '=', 'online_kronologis.idcalon')
-                ->where('online_kronologis.replid', $onlineChronologiesId)
-                ->where('online_kronologis.iduser', $user->replid)
-                ->get();
 
-            return (new PaymentRegistrationResource($payment))->response()->setStatusCode(200);
-        }
+        $payment = DB::table('online_kronologis')
+            ->select(
+                'calonsiswa.replid as idcalonsiswa',
+                'online_kronologis.replid as idonlinekronologis',
+                'online_kronologis.idcalon',
+                'online_kronologis.namacalon',
+                'calonsiswa.keu_assessment',
+                'calonsiswa.nopendaftaran',
+                'calonsiswa.keu_form',
+                'calonsiswa.keu_up'
+            )
+            ->join('calonsiswa', 'calonsiswa.replid', '=', 'online_kronologis.idcalon')
+            ->where('online_kronologis.replid', $onlineChronologiesId)
+            ->where('online_kronologis.iduser', $user->replid)
+            ->first();
+
+        return (new PaymentRegistrationResource($payment))->response()->setStatusCode(200);
+
     }
 
 }
