@@ -37,14 +37,14 @@ class ParentFormRequest extends FormRequest
             'responanak' => ['required', 'string'],
             'harapanortu_tutor' => ['required', 'string'],
             'harapanortu_pendidikan' => ['required', 'string'],
-            'psikologianak1' => $this->psikologi_anak1,
-            'psikologianak2' => $this->psikologi_anak2,
-            'psikologianak3' => $this->psikologi_anak3,
-            'psikologianak4' => $this->psikologi_anak4,
-            'psikologianak5' => $this->psikologi_anak5,
-            'psikologianak6' => $this->psikologi_anak6,
-            'psikologianak7' => $this->psikologi_anak7,
-            'psikologianak8' => $this->psikologi_anak8,
+            'psikologianak1' => ['required'],
+            'psikologianak2' => ['required'],
+            'psikologianak3' => ['required'],
+            'psikologianak4' => ['required'],
+            'psikologianak5' => ['required'],
+            'psikologianak6' => ['required'],
+            'psikologianak7' => ['required'],
+            'psikologianak8' => ['required']
         ];
     }
 
