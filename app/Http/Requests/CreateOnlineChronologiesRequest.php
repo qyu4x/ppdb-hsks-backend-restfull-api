@@ -25,7 +25,7 @@ class CreateOnlineChronologiesRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+         return [
             'nama'=> ['required', 'string'],
             'jenis_kelamin' => ['required', 'in:l,p'],
             'tanggal_lahir' => ['required', 'date', 'before_or_equal:today'],
