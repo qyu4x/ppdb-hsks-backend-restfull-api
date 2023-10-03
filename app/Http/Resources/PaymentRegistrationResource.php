@@ -27,6 +27,7 @@ class PaymentRegistrationResource extends JsonResource
             $data['biaya_formulir'] = $this->keu_assessment;
             $data['biaya_assessment'] = $this->keu_form;
         } else {
+            $data['id_calon_siswa'] = null;
             $data['no_pendaftaran'] = null;
             $data['biaya_formulir'] = 'Belum Bayar';
             $data['biaya_assessment'] = 'Belum Bayar';
