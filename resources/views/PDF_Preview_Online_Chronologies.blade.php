@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Registration Confirmation</title>
-<<<<<<< HEAD
-    <link rel="stylesheet" type="text/css" href="/css/PDF_Preview_Online_Chronologies.blade.css">
-=======
     <style>
         /* Internal CSS */
         .flex-container {
@@ -95,23 +92,14 @@
             font-weight: bold;
         }
     </style>
-    
-
->>>>>>> 48d742d9af9024e1bd0e7e7511160c75f7d0eba8
 </head>
 <body>
    <div class="flex-container">
         <div>
             <div>
-<<<<<<< HEAD
-                <p class="font-bold text-sm"><?= $onlineChronologies['nama'] ?></p>
-                <div class="flex justify-center items-center">
-                    <img class="" src="<?= $onlineChronologies->logo?>" alt="LogoHSKS" />
-=======
                 <p class="bold-text"><?= $onlineChronologies->nama?></p>
                 <div class="logo-container">
                     <img class="logo" src="<?= $onlineChronologies->logo?>" alt="LogoHSKS" />
->>>>>>> 48d742d9af9024e1bd0e7e7511160c75f7d0eba8
                 </div>
                 <p class="address-text"><?= $onlineChronologies->street?>, <?=$onlineChronologies->city?> - <?=$onlineChronologies->country?></p>
                 <p class="address-text">Telp: <?=$onlineChronologies->phone?>, <?=$onlineChronologies->wappdb?> <?=$onlineChronologies->hrm_company_email?> Website: <?=$onlineChronologies->website?></p>
