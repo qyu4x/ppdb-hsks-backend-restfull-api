@@ -19,7 +19,7 @@ use Illuminate\Http\Response;
 class OnlineChronologiesController extends Controller
 {
 
-    private function queryFindPreviewOnlineChronologiesByIdAndUserId(string $userId, string $onlineChronologiesId) : mixed
+    private function queryFindPreviewOnlineChronologiesByIdAndUserId(string $userId, string $onlineChronologiesId): mixed
     {
         $onlineChronologies = DB::table('online_kronologis')
             ->select(
@@ -75,7 +75,8 @@ class OnlineChronologiesController extends Controller
 
         return $onlineChronologies;
     }
-    public function findPreviewOnlineChronologiesByIdAndUserId(string $userId, string $onlineChronologiesId) : JsonResponse
+
+    public function findPreviewOnlineChronologiesByIdAndUserId(string $userId, string $onlineChronologiesId): JsonResponse
     {
         $userId = Crypt::decrypt(base64_decode($userId));
         $onlineChronologiesId = Crypt::decrypt(base64_decode($onlineChronologiesId));
@@ -83,7 +84,7 @@ class OnlineChronologiesController extends Controller
         return (new OnlineChronologiesPreviewResource($this->queryFindPreviewOnlineChronologiesByIdAndUserId($userId, $onlineChronologiesId)))->response()->setStatusCode(200);
     }
 
-    public function findCurrentPreviewOnlineChronologiesById(string $onlineChronologiesId) : JsonResponse
+    public function findCurrentPreviewOnlineChronologiesById(string $onlineChronologiesId): JsonResponse
     {
         $userId = auth()->user()->replid;
         $onlineChronologiesId = Crypt::decrypt(base64_decode($onlineChronologiesId));
@@ -91,7 +92,7 @@ class OnlineChronologiesController extends Controller
         return (new OnlineChronologiesPreviewResource($this->queryFindPreviewOnlineChronologiesByIdAndUserId($userId, $onlineChronologiesId)))->response()->setStatusCode(200);
     }
 
-    public function findAllCurrentPreviewOnlineChronologies() : JsonResponse
+    public function findAllCurrentPreviewOnlineChronologies(): JsonResponse
     {
         $userId = auth()->user()->replid;
 
@@ -193,7 +194,8 @@ class OnlineChronologiesController extends Controller
             ], 404));
         }
     }
-    public function createOnlineChronologies(CreateOnlineChronologiesRequest $onlineChronologiesRequest) : JsonResponse
+
+    public function createOnlineChronologies(CreateOnlineChronologiesRequest $onlineChronologiesRequest): JsonResponse
     {
         $data = $onlineChronologiesRequest->validated();
         $user = auth()->user();
@@ -279,6 +281,7 @@ class OnlineChronologiesController extends Controller
         ))->response()->setStatusCode(200);
     }
 
+
     public function generatePDF(string $onlineChronologiesId) : Response
     {
         $userId = auth()->user()->replid;
@@ -292,6 +295,80 @@ class OnlineChronologiesController extends Controller
         return response($pdf)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    }
+
+
+    private function generateRandomRegistrationNumber(): string
+    {
+        $prefix = "PPDB";
+        $randomDigits = mt_rand(1, 9999999999999);
+        return $prefix . str_pad($randomDigits, 16, '0', STR_PAD_LEFT);
+    }
+
+    public function studentCandidatesTrigger(string $idOnlineChronologies): JsonResponse
+    {
+        $onlineChronologies = DB::table('online_kronologis')
+            ->select('replid', 'ortu', 'namaortu', 'handphoneortu', 'emailortu', 'whatsapportu',
+                'namacalon', 'jeniskelamin', 'tanggallahir', 'jenjang', 'idtingkat', 'idkelompokcalon',
+                'idtahunajaran', 'abk', 'status', 'idunitbisnis', 'tokenonline', 'pemeriksaan_psikolog', 'iduser')
+            ->where('replid', '=', $idOnlineChronologies)
+            ->first();
+
+        if (!$onlineChronologies) {
+            throw new HttpResponseException(response([
+                'errors' => [
+                    'message' => [
+                        'Online chronologies not found'
+                    ]
+                ]
+            ], 404));
+        }
+
+        if (strcasecmp("ayah", $onlineChronologies->ortu) == 0) {
+            // push : father
+            $idStudentCandidate = DB::table('calonsiswa')->insertGetId([
+                'nopendaftaran' => $this->generateRandomRegistrationNumber(),
+                'nama' => $onlineChronologies->namacalon,
+                'aktif' => $onlineChronologies->status,
+                'kelamin' => $onlineChronologies->jeniskelamin,
+                'tgllahir' => $onlineChronologies->tanggallahir,
+                'namaayah' => $onlineChronologies->namaortu,
+                'hp_ayah' => $onlineChronologies->handphoneortu,
+                'emailayah' => $onlineChronologies->emailortu,
+                'abk' => $onlineChronologies->abk,
+                'idtahunajaran' => $onlineChronologies->idtahunajaran,
+                'tokenonline' => $onlineChronologies->tokenonline,
+                'keu_form' => 1,
+                'keu_assessment' => 1,
+                'keu_up' => 1,
+            ]);
+        } else {
+            // push : mother
+            $idStudentCandidate = DB::table('calonsiswa')->insertGetId([
+                'nopendaftaran' => $this->generateRandomRegistrationNumber(),
+                'nama' => $onlineChronologies->namacalon,
+                'aktif' => $onlineChronologies->status,
+                'kelamin' => $onlineChronologies->jeniskelamin,
+                'tgllahir' => $onlineChronologies->tanggallahir,
+                'namaibu' => $onlineChronologies->namaortu,
+                'hp_ibu' => $onlineChronologies->handphoneortu,
+                'emailibu' => $onlineChronologies->emailortu,
+                'abk' => $onlineChronologies->abk,
+                'idtahunajaran' => $onlineChronologies->idtahunajaran,
+                'tokenonline' => $onlineChronologies->tokenonline,
+                'keu_form' => 1,
+                'keu_assessment' => 1,
+                'keu_up' => 1
+            ]);
+        }
+
+        DB::table('online_kronologis')
+            ->where('iduser', $onlineChronologies->iduser)
+            ->update(['idcalon' => $idStudentCandidate]);
+
+        return response()->json([
+            'data' => true
+        ])->setStatusCode(200);
     }
 
 }

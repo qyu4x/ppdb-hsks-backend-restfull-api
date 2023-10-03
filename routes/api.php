@@ -16,6 +16,7 @@ use \App\Http\Controllers\GeoLocationController;
 use \App\Http\Controllers\ReligionController;
 use \App\Http\Controllers\ResidenceController;
 use \App\Http\Controllers\DocumentAttachmentController;
+use \App\Http\Controllers\PaymentRegistrationController;
 
 
 
@@ -74,6 +75,11 @@ Route::middleware(['auth-api'])->group(function () {
     Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
 
     Route::get('/v1/hsks/onlinechronologies/{idonlinechronologies}/pdf', [OnlineChronologiesController::class, 'generatePDF']);
+    Route::get('/v1/hsks/online-chronologies/{idOnlineChronologies}/payment-registration', [PaymentRegistrationController::class, 'paymentRegistrationStatus']);
+
+    // fake trigger
+    Route::post('/v1/hsks/online-chronologies/{idOnlineChronologies}/student-candidates-trigger', [OnlineChronologiesController::class, 'studentCandidatesTrigger'])->withoutMiddleware(['auth-api']);
+
 });
 
 
