@@ -74,7 +74,7 @@ Route::middleware(['auth-api'])->group(function () {
     Route::get('/v1/hsks/residences', [ResidenceController::class, 'findAllResidence'])->withoutMiddleware(['auth-api']);
     Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
 
-
+    Route::get('/v1/hsks/onlinechronologies/{idonlinechronologies}/pdf', [OnlineChronologiesController::class, 'generatePDF']);
     Route::get('/v1/hsks/online-chronologies/{idOnlineChronologies}/payment-registration', [PaymentRegistrationController::class, 'paymentRegistrationStatus']);
 
     // fake trigger
