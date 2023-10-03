@@ -26,7 +26,6 @@ class ParentFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'replidcalonsiswa' => ['required'],
             'alasan' => ['required', 'string'],
             'gambarananak' => ['required','string'],
             'hambatananak' => ['required', 'string'],

@@ -16,6 +16,7 @@ use \App\Http\Controllers\GeoLocationController;
 use \App\Http\Controllers\ReligionController;
 use \App\Http\Controllers\ResidenceController;
 use \App\Http\Controllers\DocumentAttachmentController;
+use \App\Http\Controllers\ParentFormController;
 
 
 
@@ -72,6 +73,8 @@ Route::middleware(['auth-api'])->group(function () {
 
     Route::get('/v1/hsks/residences', [ResidenceController::class, 'findAllResidence'])->withoutMiddleware(['auth-api']);
     Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
+
+    Route::post('/v1/hsks/online-chronologies/{idOnlineChronologies}/student-candidates/{idStudentCandidates}/form-parent', [ParentFormController::class, 'createParentForm']);
 });
 
 
