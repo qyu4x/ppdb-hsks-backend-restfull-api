@@ -74,7 +74,7 @@ Route::middleware(['auth-api'])->group(function () {
     Route::get('/v1/hsks/residences', [ResidenceController::class, 'findAllResidence'])->withoutMiddleware(['auth-api']);
     Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
 
-    Route::post('/v1/hsks/online-chronologies/{idOnlineChronologies}/student-candidates/{idStudentCandidates}/form-parent', [ParentFormController::class, 'createParentForm']);
+    Route::post('/v1/hsks/form-parent', [ParentFormController::class, 'createParentForm']);
 });
 
 

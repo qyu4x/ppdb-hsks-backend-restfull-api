@@ -26,6 +26,8 @@ class ParentFormRequest extends FormRequest
     public function rules()
     {
         return [
+            'online_kronologis_id' => ['required'],
+            'calon_siswa_id' => ['required'],
             'alasan' => ['required', 'string'],
             'gambarananak' => ['required','string'],
             'hambatananak' => ['required', 'string'],

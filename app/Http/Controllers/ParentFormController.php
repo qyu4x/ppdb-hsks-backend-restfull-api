@@ -17,12 +17,13 @@ class ParentFormController extends Controller
     public function createParentForm(ParentFormRequest $parentFormRequest) : JsonResponse
     {   
        $data = $parentFormRequest->validated();
+       $userId = auth()->user()->replid;
 
        $onlineChronologies = DB::table('online_kronologis')
            ->select('replid', 'iduser')
            ->where('replid', $data['online_kronologis_id'])
            ->where('idcalon', $data['calon_siswa_id'])
-           ->where('iduser', $data['user_id'])
+           ->where('iduser', $$userId)
            ->first();
 
            if (!$onlineChronologies) {
