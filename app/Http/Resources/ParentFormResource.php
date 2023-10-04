@@ -15,7 +15,6 @@ class ParentFormResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id_calon_siswa' => $this->replidcalonsiswa,
             'alasan' => $this->alasan,
             'gambaran_anak' => $this->gambarananak,
             'hambatan_anak' => $this->hambatananak,
