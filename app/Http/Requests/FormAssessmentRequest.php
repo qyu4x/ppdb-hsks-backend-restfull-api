@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class FormAssessmentRequest extends FormRequest
 {
@@ -24,14 +26,15 @@ class FormAssessmentRequest extends FormRequest
     public function rules()
     {
         return [
+            'online_kronologis_id' => ['required'],
             'replidcalonsiswa' => ['required'],
-            'namadokter' => ['string'],
-            'namapsikiater' => ['string'],
-            'namaterapis1' => ['string'],
-            'namaterapis2' => ['string'],
-            'namaterapis3' => ['string'],
-            'diagnosis' => ['string'],
-            'keluhan' => ['string'],
+            'namadokter' => ['required', 'string'],
+            'namapsikiater' => ['required', 'string'],
+            'namaterapis1' => ['required', 'string'],
+            'namaterapis2' => ['required', 'string'],
+            'namaterapis3' => ['required', 'string'],
+            'diagnosis' => ['required', 'string'],
+            'keluhan' => ['required', 'string'],
             'pakaibaju' => ['required'],
             'bukabaju' => ['required'],
             'toilet' => ['required'],
@@ -43,7 +46,7 @@ class FormAssessmentRequest extends FormRequest
             'sepatu' => ['required'],
             'kaoskaki' => ['required'],
             'talisepatu' => ['required'],
-            'sukubangsaayah' => ['required'],
+            'sukubangsaayah' => ['required', 'string'],
             'anakkeayah' => ['required'],
             'anakdariayah' => ['required'],
             'kawinayah' => ['required'],
@@ -54,12 +57,13 @@ class FormAssessmentRequest extends FormRequest
             'kawinibu' => ['required'],
             'umurkawinibu' => ['required'],
             'adopsi' => ['required'],
-            'faktoradopsi' => [],
-            'kesehatanhamil' => [],
+            'faktoradopsi' => ['required', 'string'],
+            'kesehatanhamil' => ['required', 'string'],
             'caesar' => ['required'],
             'hamilkaki' => ['required'],
-            'kondisilahirdesc' => [],
-            'angkatkepala' => ['required'],
+            'kondisilahir' => ['required'],
+            'kondisilahirdesc' => ['required', 'string'],
+            'angkatkaki' => ['required'],
             'berguling' => ['required'],
             'duduk' => ['required'],
             'merangkak' => ['required'],
@@ -72,9 +76,16 @@ class FormAssessmentRequest extends FormRequest
             'toilettraining' => ['required'],
             'satukata' => ['required'],
             'gabungkata' => ['required'],
-            'menambahobjek' => ['required'],
+            'menamaiobjek' => ['required'],
             'bertanya' => ['required'],
-            'sensoris' => []
+            'sensoris' => ['required', 'string']
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response([
+            'errors' => $validator->getMessageBag()
+        ]));
     }
 }
