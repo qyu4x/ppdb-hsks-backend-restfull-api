@@ -27,7 +27,7 @@ class ParentFormRequest extends FormRequest
     {
         return [
             'online_kronologis_id' => ['required'],
-            'calon_siswa_id' => ['required'],
+            'replidcalonsiswa' => ['required'],
             'alasan' => ['required', 'string'],
             'gambarananak' => ['required','string'],
             'hambatananak' => ['required', 'string'],
@@ -38,14 +38,14 @@ class ParentFormRequest extends FormRequest
             'responanak' => ['required', 'string'],
             'harapanortu_tutor' => ['required', 'string'],
             'harapanortu_pendidikan' => ['required', 'string'],
-            'psikologianak1' => ['required'],
-            'psikologianak2' => ['required'],
-            'psikologianak3' => ['required'],
-            'psikologianak4' => ['required'],
-            'psikologianak5' => ['required'],
-            'psikologianak6' => ['required'],
-            'psikologianak7' => ['required'],
-            'psikologianak8' => ['required']
+            'psikologisanak1' => ['required'],
+            'psikologisanak2' => ['required'],
+            'psikologisanak3' => ['required'],
+            'psikologisanak4' => ['required'],
+            'psikologisanak5' => ['required'],
+            'psikologisanak6' => ['required'],
+            'psikologisanak7' => ['required'],
+            'psikologisanak8' => ['required']
         ];
     }
 
