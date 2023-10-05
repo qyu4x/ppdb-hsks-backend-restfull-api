@@ -17,6 +17,7 @@ use \App\Http\Controllers\ReligionController;
 use \App\Http\Controllers\ResidenceController;
 use \App\Http\Controllers\DocumentAttachmentController;
 use \App\Http\Controllers\PaymentRegistrationController;
+use \App\Http\Controllers\StepController;
 
 
 
@@ -79,6 +80,8 @@ Route::middleware(['auth-api'])->group(function () {
 
     // fake trigger
     Route::post('/v1/hsks/online-chronologies/{idOnlineChronologies}/student-candidates-trigger', [OnlineChronologiesController::class, 'studentCandidatesTrigger'])->withoutMiddleware(['auth-api']);
+
+    Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/status-steps', [StepController::class, 'checkStepStatus']);
 
 });
 
