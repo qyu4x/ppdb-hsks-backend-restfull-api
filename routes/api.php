@@ -19,8 +19,8 @@ use \App\Http\Controllers\DocumentAttachmentController;
 use \App\Http\Controllers\FormAssessmentController;
 use \App\Http\Controllers\ParentFormController;
 use \App\Http\Controllers\PaymentRegistrationController;
+use \App\Http\Controllers\StepController;
 use \App\Http\Controllers\StudentCandidatesController;
-
 
 
 
@@ -87,6 +87,7 @@ Route::middleware(['auth-api'])->group(function () {
     // fake trigger
     Route::post('/v1/hsks/online-chronologies/{idOnlineChronologies}/student-candidates-trigger', [OnlineChronologiesController::class, 'studentCandidatesTrigger'])->withoutMiddleware(['auth-api']);
 
+    Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/status-steps', [StepController::class, 'checkStepStatus']);
     Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/student-candidates/{idStudentCandidates}', [StudentCandidatesController::class, 'findAvailableStudentCandidates']);
     Route::middleware('can:isParent')->patch('/v1/hsks/student-candidates', [StudentCandidatesController::class, 'updateStudentCandidates']);
 
