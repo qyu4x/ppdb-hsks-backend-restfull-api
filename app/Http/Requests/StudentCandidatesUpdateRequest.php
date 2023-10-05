@@ -15,7 +15,7 @@ class StudentCandidatesUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->user() != null;
     }
 
     /**
@@ -26,45 +26,53 @@ class StudentCandidatesUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'idkelompok'=> ['required', 'string'],
-            'nik'=> ['required', 'string'],
+            'idonlinekronologis' => ['required', 'numeric'],
+            'idcalon' => ['required', 'numeric'],
+            'nik_siswa'=> ['required', 'string', 'regex:/^[0-9+]+$/'],
             'nama'=> ['required', 'string'],
-            'paggilan'=> ['required', 'string'],
+            'panggilan'=> ['required', 'string'],
             'kelamin'=> ['required', 'string'],
             'tmplahir'=> ['required', 'string'],
             'tgllahir'=> ['required', 'string'],
             'agama'=> ['required', 'string'],
-            'warga'=> ['required', 'string'], // apakah kewarganegaraan?
+            'warga'=> ['required', 'string'],
             'anakke'=> ['required', 'integer'],
             'jsaudara'=> ['required', 'integer'],
-            'status' => ['required', 'string'],// apakah status anak,
+            //'status' => ['required', 'string'], // ini belomm
             'bahasa' => ['required', 'string'],
             'negara' => ['required', 'string'],
             'provinsi' => ['required', 'string'],
             'kota' => ['required', 'string'],
             'kecamatan' => ['required', 'string'],
-            'alamatsiswa' => ['required', 'string'], // apakah region meruapakan alamat,
+            'alamatsiswa' => ['required', 'string'],
             'kodepossiswa' => ['required', 'string'],
-            // id tempat tinggal dimana,
-            'telponsiswa' => ['required', 'string'],
-            // handphone dimana
-            // whatsapp dimana
-            'email' => ['required', 'string', 'email'],
+            'idtempattinggal' => ['required', 'numeric'],
+            'telponsiswa' => ['required', 'string', 'regex:/^[0-9+]+$/', 'max:15'],
+            'hpsiswa' => ['required', 'string', 'regex:/^[0-9+]+$/', 'max:15'],
+
+            'whatsappsiswa' => ['required', 'string', 'regex:/^[0-9+]+$/', 'max:15'], // pakai bbm
+            'emailsiswa' => ['required', 'string', 'email'],
+
             'berat' => ['required', 'numeric'],
             'tinggi' => ['required', 'numeric'],
             'darah' => ['required', 'string'],
-            // pendidikan terakhir dan jenjang terakgir belom
+            'lingkarkepala' => ['required', 'numeric'],
 
-            //
-            'kps' => ['required'],
+            'jenjangasal' => ['required', 'string'],
+            'asalsekolah' => ['string'],
+            'tingkat' => ['numeric'],
+
+            'jenjangakhir' => ['required', 'string'],
+            'sekolahjenjang' => ['required', 'string'],
+
+            'kps' => ['required', 'boolean'],
             'no_kps' => ['required'],
-            'piplayak' => ['required'],
-            'kip'=> ['required'],
+            'piplayak' => ['required', 'boolean'],
+            'kip'=> ['required', 'boolean'],
             'no_kip' => ['required'],
             'almayah' => ['required'],
-            'almibu' => ['required'],
-            'wali_opt' => [] // apakah memiliki wali?
-
+            'almibu' => ['required', 'boolean'],
+            'wali_opt' => ['required', 'boolean']
         ];
 
     }
