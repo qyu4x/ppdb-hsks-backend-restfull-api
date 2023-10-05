@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PaymentRegistrationResource extends JsonResource
 {
+
+
     /**
      * Transform the resource into an array.
      *
@@ -14,12 +16,23 @@ class PaymentRegistrationResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'no_pendaftaran' => $this->no_pendaftaran,
-            'nama_cpd' => $this->nama_cpd,
-            'biaya_formulir' => $this->biaya_formulir,
-            'biaya_assessment' => $this->biaya_assessment,
-            'id_online_kronologis' => $this->id_online_kronologis
+        $data = [
+            'id_online_kronologis' => $this->idonlinekronologis,
+            'nama_cpd' => $this->namacalon
         ];
+
+        if (isset($this->idcalon)) {
+            $data['id_calon_siswa'] = $this->idcalonsiswa;
+            $data['no_pendaftaran'] = $this->nopendaftaran;
+            $data['biaya_formulir'] = $this->keu_assessment;
+            $data['biaya_assessment'] = $this->keu_form;
+        } else {
+            $data['id_calon_siswa'] = null;
+            $data['no_pendaftaran'] = null;
+            $data['biaya_formulir'] = 'Belum Bayar';
+            $data['biaya_assessment'] = 'Belum Bayar';
+        }
+
+        return $data;
     }
 }
