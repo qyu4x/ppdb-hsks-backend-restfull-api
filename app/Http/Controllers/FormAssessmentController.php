@@ -34,7 +34,6 @@ class FormAssessmentController extends Controller
             ], 404));
         }
 
-        // Menggunakan query builder untuk menyimpan data ke dalam tabel calonsiswa_form_ortu
         $data = [
             'replidcalonsiswa' => $formAssessmentRequest->replidcalonsiswa,
             'namadokter' => $formAssessmentRequest->namadokter,

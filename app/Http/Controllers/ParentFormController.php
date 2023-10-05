@@ -16,7 +16,7 @@ use Carbon\Carbon;
 class ParentFormController extends Controller
 {
     public function createParentForm(ParentFormRequest $parentFormRequest) : JsonResponse
-    {   
+    {
        $data = $parentFormRequest->validated();
        $userId = auth()->user()->replid;
 
@@ -34,7 +34,7 @@ class ParentFormController extends Controller
                 ]
             ], 404));
         }
-        // Menggunakan query builder untuk menyimpan data ke dalam tabel calonsiswa_form_ortu
+
         $data = [
             'replidcalonsiswa' => $parentFormRequest->replidcalonsiswa,
             'alasan' => $parentFormRequest->alasan,
@@ -61,8 +61,6 @@ class ParentFormController extends Controller
 
         DB::table('calonsiswa_form_ortu')->insert($data);
 
-        
-        // Kembalikan respons JSON sukses dengan resource yang telah dibuat
         return (new ParentFormResource($parentFormRequest))->response()->setStatusCode(201);
     }
 }
