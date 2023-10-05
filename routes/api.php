@@ -16,8 +16,11 @@ use \App\Http\Controllers\GeoLocationController;
 use \App\Http\Controllers\ReligionController;
 use \App\Http\Controllers\ResidenceController;
 use \App\Http\Controllers\DocumentAttachmentController;
+use \App\Http\Controllers\FormAssessmentController;
+use \App\Http\Controllers\ParentFormController;
 use \App\Http\Controllers\PaymentRegistrationController;
 use \App\Http\Controllers\StepController;
+use \App\Http\Controllers\StudentCandidatesController;
 
 
 
@@ -75,13 +78,18 @@ Route::middleware(['auth-api'])->group(function () {
     Route::get('/v1/hsks/residences', [ResidenceController::class, 'findAllResidence'])->withoutMiddleware(['auth-api']);
     Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
 
-    Route::get('/v1/hsks/onlinechronologies/{idonlinechronologies}/pdf', [OnlineChronologiesController::class, 'generatePDF']);
+    Route::middleware('can:isParent')->post('/v1/hsks/form-assessment', [FormAssessmentController::class, 'createAssessmentForm']);
+    Route::middleware('can:isParent')->post('/v1/hsks/form-parent', [ParentFormController::class, 'createParentForm']);
+
+    Route::get('/v1/hsks/onlinechronologies/{idOnlineChronologies}/pdf', [OnlineChronologiesController::class, 'generatePDF']);
     Route::get('/v1/hsks/online-chronologies/{idOnlineChronologies}/payment-registration', [PaymentRegistrationController::class, 'paymentRegistrationStatus']);
 
     // fake trigger
     Route::post('/v1/hsks/online-chronologies/{idOnlineChronologies}/student-candidates-trigger', [OnlineChronologiesController::class, 'studentCandidatesTrigger'])->withoutMiddleware(['auth-api']);
 
     Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/status-steps', [StepController::class, 'checkStepStatus']);
+    Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/student-candidates/{idStudentCandidates}', [StudentCandidatesController::class, 'findAvailableStudentCandidates']);
+    Route::middleware('can:isParent')->patch('/v1/hsks/student-candidates', [StudentCandidatesController::class, 'updateStudentCandidates']);
 
 });
 
