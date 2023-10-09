@@ -30,6 +30,7 @@ class SchoolResource extends JsonResource
             'email' => $this->email,
             'whatsapp' => $this->whatsapp,
             'wa_ppdb' => $this->wappdb,
+            'background_image' => $this->background_image,
             'logo' => $this->logo,
             'jenis_pendidikan' => $this->jenis_pendidikan,
             'departments' => DepartmentResource::collection($this->departments),
