@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class EducationTypeController extends Controller
 {
-    public function findAllEducationType() : JsonResponse
+    public function findAllEducationType(): JsonResponse
     {
         $educationTypes = DB::table('hrm_company')
             ->distinct()
