@@ -26,7 +26,7 @@ class StudentCandidatesResource extends JsonResource
             'warga' => $this->warga,
             'anakke' => $this->anakke,
             'jsaudara' => $this->jsaudara,
-            //'status' => $this->status,
+            'statanak' => $this->statanak,
             'bahasa' => $this->bahasa,
             'negara' => $this->negara,
             'provinsi' => $this->provinsi,

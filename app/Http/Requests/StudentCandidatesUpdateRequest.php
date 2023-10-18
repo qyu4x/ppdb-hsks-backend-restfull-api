@@ -31,14 +31,14 @@ class StudentCandidatesUpdateRequest extends FormRequest
             'nik_siswa'=> ['required', 'string', 'regex:/^[0-9+]+$/'],
             'nama'=> ['required', 'string'],
             'panggilan'=> ['required', 'string'],
-            'kelamin'=> ['required', 'string'],
+            'kelamin'=> ['required', 'string', "in:p,l"],
             'tmplahir'=> ['required', 'string'],
             'tgllahir'=> ['required', 'string'],
             'agama'=> ['required', 'string'],
             'warga'=> ['required', 'string'],
             'anakke'=> ['required', 'integer'],
             'jsaudara'=> ['required', 'integer'],
-            //'status' => ['required', 'string'], // ini belomm
+            'statanak' => ['required', 'string', "in:Anak Kandung, Anak Asuh, Anak Tiri"],
             'bahasa' => ['required', 'string'],
             'negara' => ['required', 'string'],
             'provinsi' => ['required', 'string'],
@@ -49,22 +49,17 @@ class StudentCandidatesUpdateRequest extends FormRequest
             'idtempattinggal' => ['required', 'numeric'],
             'telponsiswa' => ['required', 'string', 'regex:/^[0-9+]+$/', 'max:15'],
             'hpsiswa' => ['required', 'string', 'regex:/^[0-9+]+$/', 'max:15'],
-
             'whatsappsiswa' => ['required', 'string', 'regex:/^[0-9+]+$/', 'max:15'], // pakai bbm
             'emailsiswa' => ['required', 'string', 'email'],
-
             'berat' => ['required', 'numeric'],
             'tinggi' => ['required', 'numeric'],
             'darah' => ['required', 'string'],
             'lingkarkepala' => ['required', 'numeric'],
-
             'jenjangasal' => ['required', 'string'],
             'asalsekolah' => ['string'],
             'tingkat' => ['numeric'],
-
             'jenjangakhir' => ['required', 'string'],
             'sekolahjenjang' => ['required', 'string'],
-
             'kps' => ['required', 'boolean'],
             'no_kps' => ['required'],
             'piplayak' => ['required', 'boolean'],
