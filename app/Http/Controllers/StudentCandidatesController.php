@@ -91,6 +91,7 @@ class StudentCandidatesController extends Controller
                 'negara',
                 'provinsi',
                 'kota',
+                'statanak',
                 'kecamatan',
                 'alamatsiswa',
                 'kodepossiswa',
