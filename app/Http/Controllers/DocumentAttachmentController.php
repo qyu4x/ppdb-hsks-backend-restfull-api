@@ -48,14 +48,6 @@ class DocumentAttachmentController extends Controller
             ], 404));
         }
 
-        if ($onlineChronologies->idcalon == null) {
-            throw new HttpResponseException(response([
-                'errors' => [
-                    'message' => 'please complete the administrative process first!'
-                ]
-            ], 404));
-        }
-
         $requirement = DB::table('syarat')
             ->select('replid')
             ->where('replid', '=', $data['document_type_id'])
@@ -71,18 +63,19 @@ class DocumentAttachmentController extends Controller
 
         $uploadedFiles = $documentAttachmentRequest->file('document');
 
-        $filename = base64_encode($uploadedFiles->getClientOriginalName());
+        $originalFilename = $uploadedFiles->getClientOriginalName();
+        $filename = md5(base64_encode($uploadedFiles->getClientOriginalName()));
         $extension = $uploadedFiles->getClientOriginalExtension();
 
-        $fileUrl = '/storage/documents/' . $filename . '.' . $extension;
+        $documentUrlSource = '/storage/documents/' . $filename . '.' . $extension;
         $uploadedFiles->storePubliclyAs('documents', $filename . '.' . $extension, 'public');
 
         $data = [
             'idcalonsiswa' => $onlineChronologies->idcalon,
             'idonlinekronologis' => $onlineChronologies->replid,
-            'file' => $fileUrl,
+            'file' => $originalFilename,
             'aktif' => 1,
-            'newfile' => 'wakaranai',
+            'newfile' => $documentUrlSource,
             'created_date' => Carbon::now('Asia/Jakarta'),
             'modified_date' => Carbon::now('Asia/Jakarta'),
             'iddokumentipe' => $requirement->replid
