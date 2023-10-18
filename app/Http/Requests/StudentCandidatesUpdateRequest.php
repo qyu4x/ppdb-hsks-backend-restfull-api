@@ -31,7 +31,7 @@ class StudentCandidatesUpdateRequest extends FormRequest
             'nik_siswa'=> ['required', 'string', 'regex:/^[0-9+]+$/'],
             'nama'=> ['required', 'string'],
             'panggilan'=> ['required', 'string'],
-            'kelamin'=> ['required', 'string'],
+            'kelamin'=> ['required', 'string', "in:p,l"],
             'tmplahir'=> ['required', 'string'],
             'tgllahir'=> ['required', 'string'],
             'agama'=> ['required', 'string'],
