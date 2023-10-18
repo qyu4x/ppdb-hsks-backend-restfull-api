@@ -76,7 +76,9 @@ Route::middleware(['auth-api'])->group(function () {
     Route::get('/v1/hsks/religions', [ReligionController::class, 'findAllReligion'])->withoutMiddleware(['auth-api']);
 
     Route::get('/v1/hsks/residences', [ResidenceController::class, 'findAllResidence'])->withoutMiddleware(['auth-api']);
+
     Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
+    Route::middleware('can:isParent')->post('/v1/hsks/upload-document', [DocumentAttachmentController::class, 'uploadDocument']);
 
     Route::middleware('can:isParent')->post('/v1/hsks/form-assessment', [FormAssessmentController::class, 'createAssessmentForm']);
     Route::middleware('can:isParent')->post('/v1/hsks/form-parent', [ParentFormController::class, 'createParentForm']);
