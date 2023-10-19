@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DocumentAttachmentRequest;
+use App\Http\Requests\UpdateDocumentAttachmentRequest;
 use App\Http\Resources\DocumentAttachmentResource;
 use App\Http\Resources\DocumentRequirementResource;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class DocumentAttachmentController extends Controller
@@ -85,6 +87,73 @@ class DocumentAttachmentController extends Controller
         $data['replid'] = $idAttachment;
 
         return (new DocumentAttachmentResource($data))->response()->setStatusCode(200);
+
+    }
+
+    public function updateDocument(UpdateDocumentAttachmentRequest $updateDocumentAttachmentRequest) {
+        $data = $updateDocumentAttachmentRequest->validated();
+
+         $userId = auth()->user()->replid;
+
+        $documentAttachment = DB::table('psb_calonsiswa_attachment')
+            ->select('replid', 'idcalonsiswa', 'file', 'newfile')
+            ->where('aktif', 1)
+            ->where('replid', $data->document_id)
+            ->where('iddokumentipe', $data->document_type_id)
+            ->where('idonlinekronologis', $userId)
+            ->first();
+
+        $documentAttachment->replid = 1;
+        $documentAttachment->save();
+
+        if (!$documentAttachment) {
+            throw new HttpResponseException(response([
+                'errors' => [
+                    'message' => 'document not found'
+                ]
+            ], 404));
+        }
+
+        if (!Storage::delete(str_replace('/storage/', '/app/public/', $documentAttachment->newfile))) {
+            throw new HttpResponseException(response([
+                'errors' => [
+                    'message' => 'failed to delete the previous file'
+                ]
+            ], 404));
+        }
+
+        $uploadedFiles = $updateDocumentAttachmentRequest->file('document');
+
+        $originalFilename = $uploadedFiles->getClientOriginalName();
+        $filename = md5(base64_encode($uploadedFiles->getClientOriginalName()));
+        $extension = $uploadedFiles->getClientOriginalExtension();
+
+        $documentUrlSource = '/storage/documents/' . $filename . '.' . $extension;
+        $uploadedFiles->storePubliclyAs('documents', $filename . '.' . $extension, 'public');
+
+        $data = [
+            'file' => $originalFilename,
+            'aktif' => 1,
+            'newfile' => $documentUrlSource,
+            'modified_date' => Carbon::now('Asia/Jakarta'),
+            'iddokumentipe' => $data->updated_document_id
+        ];
+
+        DB::table('psb_calonsiswa_attachment')
+            ->where('aktif', 1)
+            ->where('replid', $data->document_id)
+            ->where('iddokumentipe', $data->document_type_id)
+            ->where('idonlinekronologis', $userId)->update($data);
+
+        $documentAttachment = DB::table('psb_calonsiswa_attachment')
+            ->select('replid', 'idcalonsiswa', 'idonlinekronologis', 'file', 'newfile', 'iddokumentipe', 'created_date', 'modified_date')
+            ->where('aktif', 1)
+            ->where('replid', $data->document_id)
+            ->where('iddokumentipe', $data->document_type_id)
+            ->where('idonlinekronologis', $userId)
+            ->first();
+
+        return (new DocumentAttachmentResource($documentAttachment))->response()->setStatusCode(200);
 
     }
 

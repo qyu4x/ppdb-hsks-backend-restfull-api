@@ -18,6 +18,7 @@ class DocumentAttachmentResource extends JsonResource
         return [
             'replid' => $this['replid'],
             'id_calon_siswa' => $this['idcalonsiswa'],
+            'id_online_kronologis' => $this['idonlinekronologis'],
             'id_document_type' => $this['iddokumentipe'],
             'file' => $this['file'],
             'new_file' => $this['newfile'],
