@@ -6,6 +6,7 @@ use App\Http\Requests\DocumentAttachmentRequest;
 use App\Http\Requests\UpdateDocumentAttachmentRequest;
 use App\Http\Resources\DocumentAttachmentResource;
 use App\Http\Resources\DocumentRequirementResource;
+use App\Http\Resources\FindDocumentAttachmentResource;
 use Carbon\Carbon;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
@@ -157,5 +158,79 @@ class DocumentAttachmentController extends Controller
 
     }
 
+    public function findAllDocumentAttachmentCurrentUser () : JsonResponse {
+        $userId = auth()->user()->replid;
+
+        $onlineChronologies = DB::table('online_kronologis')
+            ->select('replid', 'iduser')
+            ->where('iduser', $userId)
+            ->first();
+
+        if (!$onlineChronologies) {
+            throw new HttpResponseException(response([
+                'errors' => [
+                    'message' => 'user or online chronologies not found'
+                ]
+            ], 404));
+        }
+
+        $documentAttachment = DB::table('psb_calonsiswa_attachment')
+            ->select('replid', 'idcalonsiswa', 'idonlinekronologis', 'iddokumentipe', 'file', 'newfile', 'created_date', 'modified_date')
+            ->where('aktif', 1)
+            ->get();
+
+        return (FindDocumentAttachmentResource::collection($documentAttachment))->response()->setStatusCode(200);
+    }
+
+    public function deleteDocument($replid)
+    {
+        $userId = auth()->user()->replid;
+
+        $onlineChronologies = DB::table('online_kronologis')
+            ->select('replid', 'iduser')
+            ->where('iduser', $userId)
+            ->first();
+
+            if (!$onlineChronologies) {
+                throw new HttpResponseException(response([
+                    'errors' => [
+                        'message' => 'user or online chronologies not found'
+                    ]
+                ], 404));
+            }
+
+        $documentAttachment = DB::table('psb_calonsiswa_attachment')
+            ->select('replid', 'newfile')
+            ->where('aktif', 1)
+            ->where('replid', $replid)
+            ->where('idonlinekronologis', $onlineChronologies->replid)
+            ->first();
+
+        if (!$documentAttachment) {
+            return response([
+                'errors' => [
+                    'message' => 'Document not found'
+                ]
+            ], 404);
+        }
+
+        if (!Storage::delete(str_replace('/storage/', 'public/', $documentAttachment->newfile))) {
+            return response([
+                'errors' => [
+                    'message' => 'Failed to delete the file'
+                ]
+            ], 500);
+        }
+
+        // Update the aktif column to 0 using Query Builder
+        DB::table('psb_calonsiswa_attachment')
+            ->where('replid', $replid)
+            ->where('idonlinekronologis', $onlineChronologies->replid)
+            ->update(['aktif' => 0]);
+
+        return response([
+            'message' => 'Success delete document'
+        ], 200);
+    }
 
 }

@@ -80,6 +80,8 @@ Route::middleware(['auth-api'])->group(function () {
     Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
     Route::middleware('can:isParent')->post('/v1/hsks/document', [DocumentAttachmentController::class, 'uploadDocument']);
     Route::middleware('can:isParent')->put('/v1/hsks/document', [DocumentAttachmentController::class, 'updateDocument']);
+    Route::middleware('can:isParent')->delete('/v1/hsks/document/{idDocumenAttachment}', [DocumentAttachmentController::class, 'deleteDocument']);
+    Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/document', [DocumentAttachmentController::class, 'findAllDocumentAttachmentCurrentUser']);
 
     Route::middleware('can:isParent')->post('/v1/hsks/form-assessment', [FormAssessmentController::class, 'createAssessmentForm']);
     Route::middleware('can:isParent')->post('/v1/hsks/form-parent', [ParentFormController::class, 'createParentForm']);
