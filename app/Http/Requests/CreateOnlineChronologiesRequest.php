@@ -43,6 +43,6 @@ class CreateOnlineChronologiesRequest extends FormRequest
     {
         throw new HttpResponseException(response([
             'errors' => $validator->getMessageBag()
-        ]));
+        ], status: 400));
     }
 }

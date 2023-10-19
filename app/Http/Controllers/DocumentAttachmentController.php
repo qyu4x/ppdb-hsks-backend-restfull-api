@@ -34,7 +34,7 @@ class DocumentAttachmentController extends Controller
     {
         $data = $documentAttachmentRequest->validated();
 
-        Log::info('controller request - executed');
+        Log::info('upload document request - executed');
         $userId = auth()->user()->replid;
 
         $onlineChronologies = DB::table('online_kronologis')
@@ -86,25 +86,55 @@ class DocumentAttachmentController extends Controller
         $idAttachment = DB::table('psb_calonsiswa_attachment')->insertGetId($data);
         $data['replid'] = $idAttachment;
 
-        return (new DocumentAttachmentResource($data))->response()->setStatusCode(200);
+        return (new DocumentAttachmentResource((object)$data))->response()->setStatusCode(200);
 
     }
 
-    public function updateDocument(UpdateDocumentAttachmentRequest $updateDocumentAttachmentRequest) {
-        $data = $updateDocumentAttachmentRequest->validated();
+    public function updateDocument(UpdateDocumentAttachmentRequest $updateDocumentAttachmentRequest): JsonResponse
+    {
+        Log::info("update document request - executed");
+        $requestData = $updateDocumentAttachmentRequest->validated();
 
-         $userId = auth()->user()->replid;
+        $userId = auth()->user()->replid;
+
+        $legacyRequirement = DB::table('syarat')
+            ->select('replid')
+            ->where('replid', '=', $requestData['document_type_id'])
+            ->first();
+
+        $updatedRequirement = DB::table('syarat')
+            ->select('replid')
+            ->where('replid', '=', $requestData['document_type_id'])
+            ->first();
+
+        if (!$legacyRequirement || !$updatedRequirement) {
+            throw new HttpResponseException(response([
+                'errors' => [
+                    'message' => 'document type not found'
+                ]
+            ], 404));
+        }
+
+        $onlineChronologies = DB::table('online_kronologis')
+            ->select('replid', 'idcalon', 'iduser')
+            ->where('iduser', $userId)
+            ->first();
+
+        if (!$onlineChronologies) {
+            throw new HttpResponseException(response([
+                'errors' => [
+                    'message' => 'online chronologies not found'
+                ]
+            ], 404));
+        }
 
         $documentAttachment = DB::table('psb_calonsiswa_attachment')
             ->select('replid', 'idcalonsiswa', 'file', 'newfile')
             ->where('aktif', 1)
-            ->where('replid', $data->document_id)
-            ->where('iddokumentipe', $data->document_type_id)
-            ->where('idonlinekronologis', $userId)
+            ->where('replid', $requestData['document_id'])
+            ->where('iddokumentipe', $requestData['document_type_id'])
+            ->where('idonlinekronologis', $onlineChronologies->replid)
             ->first();
-
-        $documentAttachment->replid = 1;
-        $documentAttachment->save();
 
         if (!$documentAttachment) {
             throw new HttpResponseException(response([
@@ -114,13 +144,15 @@ class DocumentAttachmentController extends Controller
             ], 404));
         }
 
-        if (!Storage::delete(str_replace('/storage/', '/app/public/', $documentAttachment->newfile))) {
+        $legacyFilePath = str_replace('/storage/', 'public/', $documentAttachment->newfile);
+        if (!Storage::delete($legacyFilePath)) {
             throw new HttpResponseException(response([
                 'errors' => [
                     'message' => 'failed to delete the previous file'
                 ]
             ], 404));
         }
+
 
         $uploadedFiles = $updateDocumentAttachmentRequest->file('document');
 
@@ -136,21 +168,21 @@ class DocumentAttachmentController extends Controller
             'aktif' => 1,
             'newfile' => $documentUrlSource,
             'modified_date' => Carbon::now('Asia/Jakarta'),
-            'iddokumentipe' => $data->updated_document_id
+            'iddokumentipe' => $requestData['updated_document_id']
         ];
 
         DB::table('psb_calonsiswa_attachment')
             ->where('aktif', 1)
-            ->where('replid', $data->document_id)
-            ->where('iddokumentipe', $data->document_type_id)
-            ->where('idonlinekronologis', $userId)->update($data);
+            ->where('replid', $requestData['document_id'])
+            ->where('iddokumentipe', $requestData['document_type_id'])
+            ->where('idonlinekronologis', $onlineChronologies->replid)->update($data);
 
         $documentAttachment = DB::table('psb_calonsiswa_attachment')
             ->select('replid', 'idcalonsiswa', 'idonlinekronologis', 'file', 'newfile', 'iddokumentipe', 'created_date', 'modified_date')
             ->where('aktif', 1)
-            ->where('replid', $data->document_id)
-            ->where('iddokumentipe', $data->document_type_id)
-            ->where('idonlinekronologis', $userId)
+            ->where('replid', $requestData['document_id'])
+            ->where('iddokumentipe', $requestData['document_type_id'])
+            ->where('idonlinekronologis', $onlineChronologies->replid)
             ->first();
 
         return (new DocumentAttachmentResource($documentAttachment))->response()->setStatusCode(200);

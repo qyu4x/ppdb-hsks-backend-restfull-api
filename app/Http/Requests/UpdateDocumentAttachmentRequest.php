@@ -31,12 +31,14 @@ class UpdateDocumentAttachmentRequest extends FormRequest
             'document_id' => 'required',
             'updated_document_id' => 'required'
         ];
+
     }
 
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response([
             'errors' => $validator->getMessageBag()
-        ]));
+        ], status: 400));
     }
+
 }
