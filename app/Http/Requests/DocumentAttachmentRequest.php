@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class SurveyAnswerCreateRequest extends FormRequest
+class DocumentAttachmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class SurveyAnswerCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->user() != null;
     }
 
     /**
@@ -26,11 +26,8 @@ class SurveyAnswerCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required'],
-            'online_kronologis_id' => ['required'],
-            'voting.voting_id' => ['required'],
-            'alasan.*.alasan_id' => ['required'],
-            'media.*.media_id' => ['required']
+            'document' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
+            'document_type_id' => 'required'
         ];
     }
 

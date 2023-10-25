@@ -10060,6 +10060,12 @@ ALTER TABLE online_kronologies
 ALTER TABLE calonsiswa
     ADD COLUMN lingkarkepala  decimal(4, 1) unsigned default 0.0 ;
 
+ALTER TABLE psb_calonsiswa_attachment
+    ADD COLUMN idonlinekronologis int unsigned;
+
+ALTER TABLE psb_calonsiswa_attachment
+    ADD FOREIGN KEY (idonlinekronologis) REFERENCES online_kronologis(replid);
+
 DROP TRIGGER IF EXISTS `fsync_trins_20_agama`;
 DELIMITER;;
 CREATE TRIGGER `fsync_trins_20_agama`

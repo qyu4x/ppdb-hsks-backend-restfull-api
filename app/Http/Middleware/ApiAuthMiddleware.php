@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ApiAuthMiddleware
 {
@@ -19,6 +20,7 @@ class ApiAuthMiddleware
     public function handle(Request $request, Closure $next) : Response | JsonResponse
     {
         if (auth()->check()) {
+            Log::info('middleware request - executed');
             return $next($request);
         } else {
             return response()->json(['error' => [

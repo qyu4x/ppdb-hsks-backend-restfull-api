@@ -86,6 +86,6 @@ class FormAssessmentRequest extends FormRequest
     {
         throw new HttpResponseException(response([
             'errors' => $validator->getMessageBag()
-        ]));
+        ], status: 400));
     }
 }
