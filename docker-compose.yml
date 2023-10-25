@@ -1,0 +1,25 @@
+version: "3"
+services:
+    ppdb-mariadb:
+        container_name: ppdb-mariadb
+        image: mariadb:latest
+        restart: always
+        ports:
+            - 3307:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=neko
+            - MYSQL_DATABASE=ppdb_hsks_online
+            - MYSQL_USER=neko
+            - MYSQL_PASSWORD=neko
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+            - mariadb-data-master:/var/lib/mysql
+        networks:
+            - ppdb-networks
+
+networks:
+    ppdb-networks:
+        name: ppdb-networks
+
+volumes:
+    mariadb-data-master:
