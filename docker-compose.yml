@@ -11,6 +11,7 @@ services:
             - MYSQL_DATABASE=ppdb_hsks_online
             - MYSQL_USER=neko
             - MYSQL_PASSWORD=neko
+            - MYSQL_MAX_ALLOWED_PACKET=128M
         volumes:
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql
             - mariadb-data-master:/var/lib/mysql
