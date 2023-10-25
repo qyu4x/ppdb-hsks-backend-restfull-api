@@ -17,14 +17,6 @@ services:
             - mariadb-data-master:/var/lib/mysql
         networks:
             - ppdb-networks
-    ppdb-backend:
-        build: .
-        ports:
-            - 8000:8000
-        depends_on:
-            - ppdb-mariadb
-        networks:
-            - ppdb-networks
 networks:
     ppdb-networks:
         name: ppdb-networks
