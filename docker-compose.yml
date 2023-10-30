@@ -1,25 +1,56 @@
 version: "3"
 services:
-    ppdb-mariadb:
-        container_name: ppdb-mariadb
+    mariadb:
+        container_name: mariadb
         image: mariadb:latest
         restart: always
         ports:
-            - 3307:3306
+            - 3306:3306
         environment:
-            - MYSQL_ROOT_PASSWORD=neko
-            - MYSQL_DATABASE=ppdb_hsks_online
-            - MYSQL_USER=neko
-            - MYSQL_PASSWORD=neko
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
             - MYSQL_MAX_ALLOWED_PACKET=128M
         volumes:
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql
             - mariadb-data-master:/var/lib/mysql
         networks:
             - ppdb-networks
-networks:
-    ppdb-networks:
-        name: ppdb-networks
+    backend:
+        container_name: backend
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - 9000:9000
+        working_dir: /var/www
+        volumes:
+            - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - ppdb-networks
+        depends_on:
+            - mariadb
+    webserver:
+        container_name: webserver
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx:/etc/nginx/conf.d
+        networks:
+            - ppdb-networks
+        depends_on:
+            - backend
 
 volumes:
     mariadb-data-master:
+
+networks:
+    ppdb-networks:
+        driver: bridge
+        name: ppdb-networks

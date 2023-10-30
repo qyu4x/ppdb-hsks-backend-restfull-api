@@ -10044,6 +10044,17 @@ CREATE TABLE users
 ALTER TABLE hrm_company
     ADD COLUMN jenis_pendidikan VARCHAR(10);
 
+UPDATE hrm_company
+SET jenis_pendidikan = 'FORMAL'
+WHERE replid IN (1, 4, 7);
+
+UPDATE hrm_company
+SET jenis_pendidikan = 'INFORMAL'
+WHERE replid IN (8);
+
+UPDATE hrm_company
+SET jenis_pendidikan = 'NONFORMAL'
+WHERE replid IN (5, 13, 15);
 
 ALTER TABLE hrm_company
     ADD COLUMN background_image VARCHAR(255);

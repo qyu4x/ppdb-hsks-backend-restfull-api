@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Kak Seto School API</title>
+    <title>404 Not Found</title>
     <style>
         body {
             display: flex;
@@ -25,18 +25,17 @@
         }
 
         .image-container {
-            width: 20vw;
-            height: 20vw;
+            width: 25vw;
+            height: 25vw;
             border-radius: 50%;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Reduce the margin below the image */
         }
 
         .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
         }
 
         h1 {
@@ -48,26 +47,23 @@
         p {
             font-size: 1.2em;
             color: #555;
-            margin-bottom: 20px; /* Add some margin below the paragraph */
+            margin-bottom: 10px; /* Reduce the margin below the paragraph */
         }
 
-        .footer {
-            margin-top: 20px; /* Add margin above the footer */
-            font-size: 0.9em;
-            color: #777;
+        a {
+            color: #4285f4;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="image-container">
-            <img src="https://i.ibb.co/DbVK0QZ/63374320-p0-master1200.jpg" alt="Kak Seto School">
+            <img src="https://i.ibb.co/B21YKW9/daily-shadows-house-cute-emilico-tehe-pero-expression-v0-8iemlg1himvb1.png" alt="Cute Anime Image">
         </div>
-        <h1>Welcome to Kak Seto School API</h1>
-        <p>This API endpoint serves data related to Kak Seto School. Explore and discover the information you need.</p>
-        <p>Build with love<br>5th Batch of Kampus Merdeka Internship Team</p>
-        <div class="footer">Powered by Kak Seto School API</div>
+        <h1>404 Not Found</h1>
+        <p>Oops! The page you're looking for might be in another dimension.</p>
+        <p><a href="/">Go back to safety</a></p>
     </div>
 </body>
 </html>
-
