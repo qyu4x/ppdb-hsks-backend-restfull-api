@@ -58,10 +58,6 @@ RUN chmod -R 755 /var/www/docker/entrypoint.sh
 #RUN usermod --uid 1000 www
 #RUN groupmod --gid 1001 www
 
-#RUN php artisan config:clear
-#RUN php artisan cache:clear
-#RUN php artisan optimize
-# Run the entrypoint file.
 RUN ./docker/entrypoint.sh
 
 
