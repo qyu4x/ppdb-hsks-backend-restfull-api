@@ -1,0 +1,33 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PPDB HSKS Restful-API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/hsks/education-types": {
+            "get": {
+                "tags": [
+                    "Education Types"
+                ],
+                "summary": "Find all education types",
+                "description": "Returns education types",
+                "operationId": "f51e89b2bc9cf41f26f850caf66ad4dd",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
