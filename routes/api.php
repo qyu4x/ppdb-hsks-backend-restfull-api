@@ -38,6 +38,8 @@ Route::middleware([])->group(function () {
     Route::get('/v1/hsks/department/{department}/academic-years/{idAcademicYear}/grade-level', [EducationLevelController::class, 'findGradeLevelByDepartmentAndAcademicYearId']);
 
     Route::get('/v1/hsks/company/{idCompany}/department/{department}/programs', [ProgramController::class, 'findByCompanyIdAndDepartment']);
+    
+    Route::get('/v1/hsks/{idTahunAjaran}/{idTingkat}/{idProgram}', [ProgramController::class, 'cekKapasitasKelas'])->withoutMiddleware(['auth-api']);
 
     Route::get('/v1/hsks/guardians', [GuardianController::class, 'findAllGuardian']);
 
