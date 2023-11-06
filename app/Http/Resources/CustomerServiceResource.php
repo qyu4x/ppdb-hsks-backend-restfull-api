@@ -17,6 +17,7 @@ class CustomerServiceResource extends JsonResource
         return [
             'company_code' => $this->company_code,
             'kode_cabang' => $this->kodecabang,
+            'background_image' => $this->background_image,
             'nama' => $this->nama,
             'whatsapp_ppdb' => $this->wappdb,
             'whatsapp_ppdb2' => $this->wappdb2,

@@ -175,7 +175,7 @@ class UserAuthController extends Controller
 
         return (new UserRegisterResource(
             user: $user, onlineChronologies: $onlineChronologies
-        ))->response()->setStatusCode(200);
+        ))->response()->setStatusCode(200)->header('Content-Type', 'application/json');
     }
 
     private function responseWithJwtToken(string $token): array
@@ -229,7 +229,7 @@ class UserAuthController extends Controller
 
         return (new UserLoginResource(
             user: $user, onlineChronologies: $onlineChronologies, token: $token
-        ))->response()->setStatusCode(200);
+        ))->response()->setStatusCode(200)->header('Content-Type', 'application/json');
     }
 
     public function logout() : JsonResponse
@@ -244,6 +244,6 @@ class UserAuthController extends Controller
     public function test() : JsonResponse {
         return response()->json([
             'data' => true
-        ])->setStatusCode(200);
+        ])->setStatusCode(200)->header('Content-Type', 'application/json');
     }
 }

@@ -93,7 +93,8 @@ class FormAssessmentController extends Controller
 
         DB::table('calonsiswa_form_assessment')->insert($data);
 
-        return (new FormAssessmentResource($formAssessmentRequest))->response()->setStatusCode(201);
+        return (new FormAssessmentResource($formAssessmentRequest))->response()->setStatusCode(201)
+            ->header('Content-Type', 'application/json');
 
     }
 }

@@ -39,7 +39,7 @@ class PaymentRegistrationController extends Controller
                 'calonsiswa.keu_form',
                 'calonsiswa.keu_up'
             )
-            ->join('calonsiswa', 'calonsiswa.replid', '=', 'online_kronologis.idcalon')
+            ->leftJoin('calonsiswa', 'calonsiswa.replid', '=', 'online_kronologis.idcalon')
             ->where('online_kronologis.replid', $onlineChronologiesId)
             ->where('online_kronologis.iduser', $user->replid)
             ->first();

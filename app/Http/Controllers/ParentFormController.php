@@ -61,6 +61,7 @@ class ParentFormController extends Controller
 
         DB::table('calonsiswa_form_ortu')->insert($data);
 
-        return (new ParentFormResource($parentFormRequest))->response()->setStatusCode(201);
+        return (new ParentFormResource($parentFormRequest))->response()->setStatusCode(201)
+            ->header('Content-Type', 'application/json');
     }
 }

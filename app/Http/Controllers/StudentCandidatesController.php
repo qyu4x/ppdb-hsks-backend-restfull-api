@@ -121,6 +121,7 @@ class StudentCandidatesController extends Controller
             ->where('replid', $data['idcalon'])
             ->first();
 
-        return (new StudentCandidatesResource($studentCandidates))->response()->setStatusCode(200);
+        return (new StudentCandidatesResource($studentCandidates))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 }
