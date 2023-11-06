@@ -41,6 +41,7 @@ class DocumentAttachmentController extends Controller
         $onlineChronologies = DB::table('online_kronologis')
             ->select('replid', 'idcalon', 'iduser')
             ->where('iduser', $userId)
+            ->where('replid', $data['online_kronologis_id'])
             ->first();
 
         if (!$onlineChronologies) {
@@ -87,7 +88,7 @@ class DocumentAttachmentController extends Controller
         $idAttachment = DB::table('psb_calonsiswa_attachment')->insertGetId($data);
         $data['replid'] = $idAttachment;
 
-        return (new DocumentAttachmentResource((object)$data))->response()->setStatusCode(200);
+        return (new DocumentAttachmentResource((object)$data))->response()->setStatusCode(200)->header('Content-Type', 'application/json');
 
     }
 
@@ -119,6 +120,7 @@ class DocumentAttachmentController extends Controller
         $onlineChronologies = DB::table('online_kronologis')
             ->select('replid', 'idcalon', 'iduser')
             ->where('iduser', $userId)
+            ->where('replid', $requestData['online_kronologis_id'])
             ->first();
 
         if (!$onlineChronologies) {
@@ -186,16 +188,17 @@ class DocumentAttachmentController extends Controller
             ->where('idonlinekronologis', $onlineChronologies->replid)
             ->first();
 
-        return (new DocumentAttachmentResource($documentAttachment))->response()->setStatusCode(200);
+        return (new DocumentAttachmentResource($documentAttachment))->response()->setStatusCode(200)->header('Content-Type', 'application/json');
 
     }
 
-    public function findAllDocumentAttachmentCurrentUser () : JsonResponse {
+    public function findAllDocumentAttachmentCurrentUser(string $idOnlineChronologies) : JsonResponse {
         $userId = auth()->user()->replid;
 
         $onlineChronologies = DB::table('online_kronologis')
             ->select('replid', 'iduser')
             ->where('iduser', $userId)
+            ->where('replid', $idOnlineChronologies)
             ->first();
 
         if (!$onlineChronologies) {
@@ -214,13 +217,14 @@ class DocumentAttachmentController extends Controller
         return (FindDocumentAttachmentResource::collection($documentAttachment))->response()->setStatusCode(200);
     }
 
-    public function deleteDocument($replid)
+    public function deleteDocument(string $idOnlineChronologies, string $idDocument)
     {
         $userId = auth()->user()->replid;
 
         $onlineChronologies = DB::table('online_kronologis')
             ->select('replid', 'iduser')
             ->where('iduser', $userId)
+            ->where('replid', $idOnlineChronologies)
             ->first();
 
             if (!$onlineChronologies) {
@@ -234,7 +238,7 @@ class DocumentAttachmentController extends Controller
         $documentAttachment = DB::table('psb_calonsiswa_attachment')
             ->select('replid', 'newfile')
             ->where('aktif', 1)
-            ->where('replid', $replid)
+            ->where('replid', $idDocument)
             ->where('idonlinekronologis', $onlineChronologies->replid)
             ->first();
 
@@ -256,13 +260,13 @@ class DocumentAttachmentController extends Controller
 
         // Update the aktif column to 0 using Query Builder
         DB::table('psb_calonsiswa_attachment')
-            ->where('replid', $replid)
+            ->where('replid', $idDocument)
             ->where('idonlinekronologis', $onlineChronologies->replid)
             ->update(['aktif' => 0]);
 
         return response([
             'message' => 'Success delete document'
-        ], 200);
+        ], 200)->header('Content-Type', 'application/json');
     }
 
 }

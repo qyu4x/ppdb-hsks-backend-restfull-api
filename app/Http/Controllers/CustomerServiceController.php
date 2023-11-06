@@ -11,7 +11,7 @@ class CustomerServiceController extends Controller
     public function findCustomerServiceByCompanyId(string $companyId)
     {
         $customerServices = DB::table('hrm_company')
-            ->select('company_code', 'kodecabang', 'nama', 'wappdb', 'wappdb2', 'wappdb3')
+            ->select('company_code', 'kodecabang', 'nama', 'wappdb', 'wappdb2', 'wappdb3', 'background_image')
             ->where('ppdb', 1)
             ->where('replid', $companyId)
             ->get();

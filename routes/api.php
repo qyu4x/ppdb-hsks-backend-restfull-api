@@ -52,7 +52,7 @@ Route::middleware(['auth-api'])->group(function () {
 
     Route::get('/v1/hsks/company/{idCompany}/department/{idDepartment}/programs', [ProgramController::class, 'findByCompanyIdAndDepartmentId'])->withoutMiddleware(['auth-api']);
 
-    Route::get('/v1/hsks/guardians', [GuardianController::class, 'findAllGuardian']);
+    Route::get('/v1/hsks/guardians', [GuardianController::class, 'findAllGuardian'])->withoutMiddleware(['auth-api']);
 
     Route::get('/v1/hsks/company/{idCompany}/customer-services', [CustomerServiceController::class, 'findCustomerServiceByCompanyId'])->withoutMiddleware(['auth-api']);
 
@@ -80,7 +80,7 @@ Route::middleware(['auth-api'])->group(function () {
     Route::get('/v1/hsks/document-requirements', [DocumentAttachmentController::class, 'findAllRequirementDocument'])->withoutMiddleware(['auth-api']);
     Route::middleware('can:isParent')->post('/v1/hsks/document', [DocumentAttachmentController::class, 'uploadDocument']);
     Route::middleware('can:isParent')->post('/v1/hsks/update-document', [DocumentAttachmentController::class, 'updateDocument']);
-    Route::middleware('can:isParent')->delete('/v1/hsks/document/{idDocumenAttachment}', [DocumentAttachmentController::class, 'deleteDocument']);
+    Route::middleware('can:isParent')->delete('/v1/hsks/online-chronologies/{idOnlineChronologies}/document/{idDocument}', [DocumentAttachmentController::class, 'deleteDocument']);
     Route::middleware('can:isParent')->get('/v1/hsks/online-chronologies/{idOnlineChronologies}/document', [DocumentAttachmentController::class, 'findAllDocumentAttachmentCurrentUser']);
 
 

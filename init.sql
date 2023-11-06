@@ -10065,7 +10065,7 @@ ALTER TABLE online_kronologis
 ALTER TABLE online_kronologis
     ADD FOREIGN KEY (iduser) REFERENCES users (replid);
 
-ALTER TABLE online_kronologies
+ALTER TABLE online_kronologis
     ADD CONSTRAINT unique_iduser UNIQUE (iduser);
 
 ALTER TABLE calonsiswa
@@ -10085,7 +10085,7 @@ CREATE TRIGGER `fsync_trins_20_agama`
     FOR EACH ROW SET NEW.token = FLOOR(1 + (RAND() * 65530))
 ;
 ;;
-DELIMITER;
+DELIMITER;;
 DROP TRIGGER IF EXISTS `fsync_trupd_20_agama`;
 DELIMITER;;
 CREATE TRIGGER `fsync_trupd_20_agama`

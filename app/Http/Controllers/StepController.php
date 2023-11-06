@@ -85,7 +85,7 @@ class StepController extends Controller
             $regularFormStatusResource = new RegularFormStatusResource(finished: true, locked: true);
         }
 
-        if ($regularFormStatusResource->isFinished() && $payment->idcalon != null) {
+        if ($regularFormStatusResource->isFinished() && isset($payment->idcalon)) {
             $parentForm = DB::table('calonsiswa_form_ortu')
                 ->select('replid')
                 ->where('replidcalonsiswa', $studentCandidates->replid)
@@ -100,7 +100,7 @@ class StepController extends Controller
             $parentFormStatusResource = new ParentFormStatusResource(finished: false, locked: true);
         }
 
-        if ($parentFormStatusResource->isFinished() && $payment->idcalon != null) {
+        if ($parentFormStatusResource->isFinished() && isset($payment->idcalon)) {
             $studentCandidatesAssessment = DB::table('calonsiswa_form_assessment')
                 ->select('replid')
                 ->where('replidcalonsiswa', $studentCandidates->replid)
@@ -115,7 +115,7 @@ class StepController extends Controller
             $assessmentFormStatusResource = new AssessmentFormStatusResource(finished: false, locked: true);
         }
 
-        if ($assessmentFormStatusResource->isFinished() && $payment->idcalon != null) {
+        if ($assessmentFormStatusResource->isFinished() && isset($payment->idcalon)) {
             $attachment = DB::table('psb_calonsiswa_attachment')
                 ->select('replid')
                 ->where('idcalonsiswa', $studentCandidates->replid)

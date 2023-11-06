@@ -138,7 +138,7 @@ class SurveyController extends Controller
 
         return response()->json([
             'data' => true
-        ])->setStatusCode(200);
+        ])->setStatusCode(200)->header('Content-Type', 'application/json');
     }
 
 }

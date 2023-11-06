@@ -27,7 +27,8 @@ class DocumentAttachmentRequest extends FormRequest
     {
         return [
             'document' => 'required|mimes:pdf,jpeg,png,jpg|max:2048',
-            'document_type_id' => 'required'
+            'document_type_id' => 'required',
+            'online_kronologis_id' => 'required'
         ];
     }
 
