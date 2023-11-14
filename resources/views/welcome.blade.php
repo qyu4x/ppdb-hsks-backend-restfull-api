@@ -61,7 +61,7 @@
 <body>
     <div class="container">
         <div class="image-container">
-            <img src="https://i.ibb.co/DbVK0QZ/63374320-p0-master1200.jpg" alt="Kak Seto School">
+            <img src="https://i.ibb.co/b7JJym7/aa8f7717e512eaa465a38199574a0eb1.jpg" alt="Kak Seto School">
         </div>
         <h1>Welcome to Kak Seto School API</h1>
         <p>This API endpoint serves data related to Kak Seto School. Explore and discover the information you need.</p>
