@@ -30,7 +30,7 @@ class StudentCandidatesController extends Controller
                         'Data not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $studentCandidates = DB::table('calonsiswa')
@@ -43,7 +43,8 @@ class StudentCandidatesController extends Controller
             ->where('replid',  $idStudentCandidates)
             ->first();
 
-        return (new StudentCandidatesAvailableDataResource($studentCandidates))->response()->setStatusCode(200);
+        return (new StudentCandidatesAvailableDataResource($studentCandidates))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 
     public function updateStudentCandidates(StudentCandidatesUpdateRequest $studentCandidatesUpdateRequest): JsonResponse
@@ -65,7 +66,7 @@ class StudentCandidatesController extends Controller
                         'Data not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $data['pinbbm'] = $data['whatsappsiswa'];

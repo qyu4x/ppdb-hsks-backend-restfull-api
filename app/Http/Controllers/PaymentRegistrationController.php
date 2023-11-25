@@ -24,7 +24,7 @@ class PaymentRegistrationController extends Controller
                 'errors' => [
                     'message' => 'online chronologies not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
 
@@ -44,7 +44,8 @@ class PaymentRegistrationController extends Controller
             ->where('online_kronologis.iduser', $user->replid)
             ->first();
 
-        return (new PaymentRegistrationResource($payment))->response()->setStatusCode(200);
+        return (new PaymentRegistrationResource($payment))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
 
     }
 

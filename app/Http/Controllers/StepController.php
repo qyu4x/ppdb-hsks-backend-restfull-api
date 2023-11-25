@@ -31,7 +31,7 @@ class StepController extends Controller
                 'errors' => [
                     'message' => 'online chronologies not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
 
@@ -134,6 +134,6 @@ class StepController extends Controller
             registrationStatusResource: $registrationStatusResource, paymentStatusResource: $paymentStatusResource,
             requirementStatusResource: $requirementStatusResource, regularFormStatusResource: $regularFormStatusResource,
             parentFormStatusResource: $parentFormStatusResource, assessmentFormStatusResource: $assessmentFormStatusResource
-        ))->response()->setStatusCode(200);
+        ))->response()->setStatusCode(200)->header('Content-Type', 'application/json');
     }
 }

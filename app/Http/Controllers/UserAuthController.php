@@ -44,7 +44,7 @@ class UserAuthController extends Controller
                         'Email already exists'
                     ]
                 ]
-            ], 409));
+            ], 409)->header('Content-Type', 'application/json'));
         }
 
         $company = DB::table('hrm_company')
@@ -58,7 +58,7 @@ class UserAuthController extends Controller
                         'Unit business not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $academicYear = DB::table('tahunajaran')
@@ -72,7 +72,7 @@ class UserAuthController extends Controller
                         'Academic year not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $grade = DB::table('tingkat')
@@ -86,7 +86,7 @@ class UserAuthController extends Controller
                         'Grade level not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $program = DB::table('kelompoksiswa')
@@ -100,7 +100,7 @@ class UserAuthController extends Controller
                         'Student group not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
     }
 
@@ -195,7 +195,7 @@ class UserAuthController extends Controller
                 'errors' => [
                     'message' => 'Unauthorized'
                 ]
-            ], 401);
+            ], 401)->header('Content-Type', 'application/json');
         }
 
         $token = $this->responseWithJwtToken($token);
@@ -237,7 +237,7 @@ class UserAuthController extends Controller
         auth()->logout();
         return response()->json([
             'data' => true
-        ])->setStatusCode(200);
+        ])->setStatusCode(200)->header('Content-Type', 'application/json');
 
     }
 

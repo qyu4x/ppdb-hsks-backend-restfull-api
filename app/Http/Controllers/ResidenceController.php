@@ -17,6 +17,7 @@ class ResidenceController extends Controller
             ->orderBy('replid')
             ->get();
 
-        return (ResidenceResource::collection($residence))->response()->setStatusCode(200);
+        return (ResidenceResource::collection($residence))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 }

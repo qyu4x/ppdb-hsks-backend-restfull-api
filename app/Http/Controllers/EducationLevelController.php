@@ -23,7 +23,8 @@ class EducationLevelController extends Controller
             ->orderBy('departemen.urutan')
             ->get();
 
-        return (new DepartmentResourceCollection($departments))->response()->setStatusCode(200);
+        return (new DepartmentResourceCollection($departments))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 
     public function findGradeLevelByCompanyIdAndDepartmentIdAndAcademicYearId(string $companyId, string $departmentId, string $academicYearId) : JsonResponse
@@ -44,7 +45,8 @@ class EducationLevelController extends Controller
             ->orderBy('tingkat.urutan', 'asc')
             ->get();
 
-        return (new GradeLevelResourceCollection($gradeLevel))->response()->setStatusCode(200);
+        return (new GradeLevelResourceCollection($gradeLevel))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
 
     }
 }

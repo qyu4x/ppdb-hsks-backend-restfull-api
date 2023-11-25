@@ -139,7 +139,8 @@ class OnlineChronologiesController extends Controller
             ->where('online_kronologis.iduser', $userId)
             ->get();
 
-        return (new OnlineChronologiesPreviewResourceCollection($onlineChronologies))->response()->setStatusCode(200);
+        return (new OnlineChronologiesPreviewResourceCollection($onlineChronologies))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 
     private function createOnlineChronologiesValidationAvailableDependencyData(mixed $data)
@@ -155,7 +156,7 @@ class OnlineChronologiesController extends Controller
                         'Unit business not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $academicYear = DB::table('tahunajaran')
@@ -169,7 +170,7 @@ class OnlineChronologiesController extends Controller
                         'Academic year not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $grade = DB::table('tingkat')
@@ -183,7 +184,7 @@ class OnlineChronologiesController extends Controller
                         'Grade level not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $program = DB::table('kelompoksiswa')
@@ -197,7 +198,7 @@ class OnlineChronologiesController extends Controller
                         'Student group not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
     }
 
@@ -223,7 +224,7 @@ class OnlineChronologiesController extends Controller
                         'User not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $onlineChronologiesId = DB::table('online_kronologis')->insertGetId([
@@ -327,7 +328,7 @@ class OnlineChronologiesController extends Controller
                         'Online chronologies not found'
                     ]
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         if (strcasecmp("ayah", $onlineChronologies->ortu) == 0) {

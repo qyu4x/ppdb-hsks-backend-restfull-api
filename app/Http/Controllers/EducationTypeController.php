@@ -18,7 +18,8 @@ class EducationTypeController extends Controller
             ->whereNot('jenis_pendidikan', null)
             ->get();
 
-        return (new EducationTypeResourceCollection($educationTypes))->response()->setStatusCode(200);
+        return (new EducationTypeResourceCollection($educationTypes))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
 
     }
 }

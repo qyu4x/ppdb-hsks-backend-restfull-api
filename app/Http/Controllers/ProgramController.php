@@ -27,6 +27,7 @@ class ProgramController extends Controller
             ->get();
 
 
-        return (new ProgramResourceCollection($programs))->response()->setStatusCode(200);
+        return (new ProgramResourceCollection($programs))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 }
