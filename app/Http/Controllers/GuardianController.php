@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\GuardianResourceCollection;
 use Illuminate\Http\JsonResponse;
- 
+
 class GuardianController extends Controller
 {
     public function findAllGuardian () : JsonResponse
@@ -16,8 +16,9 @@ class GuardianController extends Controller
             ->orderBy ('urutan')
             ->whereNot('urutan', '=', 0)
             ->get ();
-         
-        return (new GuardianResourceCollection($guardian))->response()->setStatusCode(200);
+
+        return (new GuardianResourceCollection($guardian))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
-    
+
 }

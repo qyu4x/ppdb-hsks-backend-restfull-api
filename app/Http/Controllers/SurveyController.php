@@ -33,7 +33,7 @@ class SurveyController extends Controller
 
         return (new SurveyResource(
             voting: $voting, reason: $reason, media: $media
-        ))->response()->setStatusCode(200);
+        ))->response()->setStatusCode(200)->header('Content-Type', 'application/json');
     }
 
     private function validationPostAnswer(mixed $data) : void {
@@ -48,7 +48,7 @@ class SurveyController extends Controller
                 'errors' => [
                     'message' => 'user or online chronologies not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $voting = DB::table('online_kronologis_reff')
@@ -61,7 +61,7 @@ class SurveyController extends Controller
                 'errors' => [
                     'message' => 'voting not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         foreach ($data['alasan'] as $reason) {
@@ -75,7 +75,7 @@ class SurveyController extends Controller
                     'errors' => [
                         'message' => 'reason not found'
                     ]
-                ], 404));
+                ], 404)->header('Content-Type', 'application/json'));
             }
         }
 
@@ -90,7 +90,7 @@ class SurveyController extends Controller
                     'errors' => [
                         'message' => 'media not found'
                     ]
-                ], 404));
+                ], 404)->header('Content-Type', 'application/json'));
             }
         }
 
@@ -110,7 +110,7 @@ class SurveyController extends Controller
                 'errors' => [
                     'message' => 'user or online chronologies not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $this->validationPostAnswer($data);

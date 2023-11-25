@@ -18,7 +18,8 @@ class GeoLocationController extends Controller
             ->orderBy('negara')
             ->get();
 
-        return (GeoLocationCountryResource::collection($country))->response()->setStatusCode(200);
+        return (GeoLocationCountryResource::collection($country))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
 
     }
 
@@ -30,7 +31,8 @@ class GeoLocationController extends Controller
             ->orderBy('urutan')
             ->get();
 
-        return (GeoLocationProvinceResource::collection($province))->response()->setStatusCode(200);
+        return (GeoLocationProvinceResource::collection($province))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 
     public function findAllCityByProvinceId(string $provinceId) : JsonResponse
@@ -42,7 +44,8 @@ class GeoLocationController extends Controller
             ->orderBy('urutan')
             ->get();
 
-        return (GeoLocationCityResource::collection($city))->response()->setStatusCode(200);
+        return (GeoLocationCityResource::collection($city))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
 
     }
 }

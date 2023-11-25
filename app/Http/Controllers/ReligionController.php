@@ -18,6 +18,7 @@ class ReligionController extends Controller
             ->orderBy('agama')
             ->get();
 
-        return (ReligionResource::collection($religion))->response()->setStatusCode(200);
+        return (ReligionResource::collection($religion))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 }

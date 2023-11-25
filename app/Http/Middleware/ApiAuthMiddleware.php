@@ -25,7 +25,7 @@ class ApiAuthMiddleware
         } else {
             return response()->json(['error' => [
                 'message' => 'Unauthorized'
-            ]], 401);
+            ]], 401)->header('Content-Type', 'application/json');
         }
     }
 }

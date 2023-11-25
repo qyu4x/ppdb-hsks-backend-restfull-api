@@ -45,6 +45,7 @@ class SchoolController extends Controller
 
         });
 
-        return (new SchoolResourceCollection($school))->response()->setStatusCode(200);
+        return (new SchoolResourceCollection($school))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 }

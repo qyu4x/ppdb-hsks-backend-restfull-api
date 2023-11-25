@@ -32,7 +32,7 @@ class ParentFormController extends Controller
                 'errors' => [
                     'message' => 'user or online chronologies not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $data = [

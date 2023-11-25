@@ -22,6 +22,7 @@ class AcademicYearController extends Controller
             ->where('tahunajaran.aktif', '=', 1)
             ->get();
 
-        return (new AcademicYearResourceCollection($academicYears))->response()->setStatusCode(200);
+        return (new AcademicYearResourceCollection($academicYears))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 }

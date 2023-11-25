@@ -16,7 +16,8 @@ class CustomerServiceController extends Controller
             ->where('replid', $companyId)
             ->get();
 
-        return (new CustomerServiceResourceCollection($customerServices))->response()->setStatusCode(200);
+        return (new CustomerServiceResourceCollection($customerServices))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
 
     }
 }

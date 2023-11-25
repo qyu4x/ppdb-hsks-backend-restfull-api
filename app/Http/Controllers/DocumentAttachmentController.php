@@ -114,7 +114,7 @@ class DocumentAttachmentController extends Controller
                 'errors' => [
                     'message' => 'document type not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $onlineChronologies = DB::table('online_kronologis')
@@ -128,7 +128,7 @@ class DocumentAttachmentController extends Controller
                 'errors' => [
                     'message' => 'online chronologies not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $documentAttachment = DB::table('psb_calonsiswa_attachment')
@@ -144,7 +144,7 @@ class DocumentAttachmentController extends Controller
                 'errors' => [
                     'message' => 'document not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $legacyFilePath = str_replace('/storage/', 'public/', $documentAttachment->newfile);
@@ -153,7 +153,7 @@ class DocumentAttachmentController extends Controller
                 'errors' => [
                     'message' => 'failed to delete the previous file'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
 
@@ -188,7 +188,8 @@ class DocumentAttachmentController extends Controller
             ->where('idonlinekronologis', $onlineChronologies->replid)
             ->first();
 
-        return (new DocumentAttachmentResource($documentAttachment))->response()->setStatusCode(200)->header('Content-Type', 'application/json');
+        return (new DocumentAttachmentResource($documentAttachment))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
 
     }
 
@@ -206,7 +207,7 @@ class DocumentAttachmentController extends Controller
                 'errors' => [
                     'message' => 'user or online chronologies not found'
                 ]
-            ], 404));
+            ], 404)->header('Content-Type', 'application/json'));
         }
 
         $documentAttachment = DB::table('psb_calonsiswa_attachment')
@@ -214,7 +215,8 @@ class DocumentAttachmentController extends Controller
             ->where('aktif', 1)
             ->get();
 
-        return (FindDocumentAttachmentResource::collection($documentAttachment))->response()->setStatusCode(200);
+        return (FindDocumentAttachmentResource::collection($documentAttachment))->response()->setStatusCode(200)
+            ->header('Content-Type', 'application/json');
     }
 
     public function deleteDocument(string $idOnlineChronologies, string $idDocument)
@@ -232,7 +234,7 @@ class DocumentAttachmentController extends Controller
                     'errors' => [
                         'message' => 'user or online chronologies not found'
                     ]
-                ], 404));
+                ], 404)->header('Content-Type', 'application/json'));
             }
 
         $documentAttachment = DB::table('psb_calonsiswa_attachment')
@@ -247,7 +249,7 @@ class DocumentAttachmentController extends Controller
                 'errors' => [
                     'message' => 'Document not found'
                 ]
-            ], 404);
+            ], 404)->header('Content-Type', 'application/json');
         }
 
         if (!Storage::delete(str_replace('/storage/', 'public/', $documentAttachment->newfile))) {
@@ -255,7 +257,7 @@ class DocumentAttachmentController extends Controller
                 'errors' => [
                     'message' => 'Failed to delete the file'
                 ]
-            ], 500);
+            ], 500)->header('Content-Type', 'application/json');
         }
 
         // Update the aktif column to 0 using Query Builder
