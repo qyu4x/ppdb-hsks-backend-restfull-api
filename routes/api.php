@@ -39,7 +39,7 @@ use \App\Http\Controllers\StudentCandidatesController;
 //    return $request->user();
 //});
 
-Route::middleware(['auth-api'])->group(function () {
+Route::middleware(['auth-api', 'cors'])->group(function () {
     Route::get('/v1/hsks/education-types', [EducationTypeController::class, 'findAllEducationType'])->withoutMiddleware(['auth-api']);
 
     Route::get('/v1/hsks/education-types/{educationType}/schools', [SchoolController::class, 'findAllSchool'])->withoutMiddleware(['auth-api']);
